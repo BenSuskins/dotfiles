@@ -66,8 +66,27 @@
 
       # Mac OS System
       system.defaults = {
-        dock.autohide = true;
+          dock = {
+            autohide = true;
+            orientation = "bottom";
+            largesize = 66;
+            tilesize = 58;
+            magnification = true;
+            show-recents = false;
+          };
+          finder = {
+            AppleShowAllExtensions = true;
+            AppleShowAllFiles = true;
+            FXPreferredViewStyle = "icnv";
+            FXEnableExtensionChangeWarning = false;
+          };
+          NSGlobalDomain = {
+            "com.apple.keyboard.fnState" = true;
+          };
       };
+
+      # Enable Touch ID Sudo
+      security.pam.enableSudoTouchIdAuth = true;
 
       # Create alias' for GUI apps in Applications
       system.activationScripts.applications.text = let
