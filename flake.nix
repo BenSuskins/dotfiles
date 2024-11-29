@@ -72,9 +72,20 @@
             tilesize = 58;
             magnification = true;
             show-recents = false;
+            persistent-apps = [
+              "/System/Applications/Launchpad.app"
+              "/System/Applications/Messages.app"
+              "/System/Applications/Calendar.app"
+              "${pkgs.alacritty}/Applications/Alacritty.app"
+              "/Applications/Safari.app"
+              "/System/Applications/Notes.app"
+              "/Applications/Spotify.app"
+              "/System/Applications/iPhone Mirroring.app"
+            ];
           };
           finder = {
             AppleShowAllExtensions = true;
+            ShowPathbar = true;
             AppleShowAllFiles = true;
             FXPreferredViewStyle = "icnv";
             FXEnableExtensionChangeWarning = false;
