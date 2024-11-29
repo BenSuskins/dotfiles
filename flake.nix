@@ -60,6 +60,13 @@
           casks = [];
           masApps = {};
           onActivation.cleanup = "zap";
+          onActivation.autoUpdate = true;
+          onActivation.upgrade = true;
+      };
+
+      # Mac OS System
+      system.defaults = {
+        dock.autohide = true;
       };
 
       # Create alias' for GUI apps in Applications
@@ -71,16 +78,16 @@
         };
       in
         pkgs.lib.mkForce ''
-        # Set up applications.
-        echo "setting up /Applications..." >&2
-        rm -rf /Applications/Nix\ Apps
-        mkdir -p /Applications/Nix\ Apps
-        find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
-        while read -r src; do
-          app_name=$(basename "$src")
-          echo "copying $src" >&2
-          ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
-        done
+          # Set up applications.
+          echo "setting up /Applications..." >&2
+          rm -rf /Applications/Nix\ Apps
+          mkdir -p /Applications/Nix\ Apps
+          find ${env}/Applications -maxdepth 1 -type l -exec readlink '{}' + |
+          while read -r src; do
+            app_name=$(basename "$src")
+            echo "copying $src" >&2
+            ${pkgs.mkalias}/bin/mkalias "$src" "/Applications/Nix Apps/$app_name"
+          done
         '';
 
       # Necessary for using flakes on this system.
