@@ -36,7 +36,6 @@
           pkgs.gh
           pkgs.mkalias
           pkgs.alacritty
-          pkgs.iterm2
           pkgs.vscode
           pkgs.postman
           pkgs.maccy
