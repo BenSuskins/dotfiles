@@ -3,30 +3,64 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
+    homebrew-core = {
+      url = "github:homebrew/homebrew-core";
+      flake = false;
+    };
+    homebrew-cask = {
+      url = "github:homebrew/homebrew-cask";
+      flake = false;
+    };
+    homebrew-bundle = {
+      url = "github:homebrew/homebrew-bundle";
+      flake = false;
+    };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, }:
   let
     configuration = { pkgs, config, ... }: {
 
       nixpkgs.config.allowUnfree = true;
 
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
+      # Packages
       environment.systemPackages = [ 
           pkgs.neovim
           pkgs.ansible
+          pkgs.pure-prompt
           pkgs.gh
           pkgs.mkalias
           pkgs.alacritty
+          pkgs.iterm2
+          pkgs.vscode
+          pkgs.postman
+          pkgs.maccy
+          pkgs.jetbrains.idea-community
         ];
 
+      # Fonts
       fonts.packages =  [
           pkgs.nerd-fonts.fira-code
           pkgs.nerd-fonts.jetbrains-mono
       ];
+
+      # Homebrew
+      homebrew =  {
+          enable = true;
+          brews = [
+              "zsh-syntax-highlighting"
+              "z"
+              "zsh-autosuggestions"
+          ];
+          casks = [];
+          masApps = {};
+          onActivation.cleanup = "zap";
+      };
 
       # Create alias' for GUI apps in Applications
       system.activationScripts.applications.text = let
@@ -70,7 +104,25 @@
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#Bens-MacBook-Pro
     darwinConfigurations."Bens-MacBook-Pro" = nix-darwin.lib.darwinSystem {
-      modules = [ configuration ];
+      modules = [ 
+         configuration
+         nix-homebrew.darwinModules.nix-homebrew
+          {
+            nix-homebrew = {
+              enable = true;
+              enableRosetta = true;
+              user = "bensuskins";
+
+              autoMigrate = true;
+
+              taps = {
+                "homebrew/homebrew-core" = homebrew-core;
+                "homebrew/homebrew-cask" = homebrew-cask;
+                "homebrew/homebrew-bundle" = homebrew-bundle;
+              };
+            };
+          }
+       ];
     };
   };
 }
