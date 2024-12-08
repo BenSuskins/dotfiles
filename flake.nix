@@ -30,10 +30,15 @@
 
       # Packages
       environment.systemPackages = [ 
-          pkgs.neovim
+          # Ansible
           pkgs.ansible
-          pkgs.pure-prompt
+          pkgs.ansible-lint
+          # CLI Tools
+          pkgs.neovim
           pkgs.gh
+          # Shell config
+          pkgs.pure-prompt
+          # Misc
           pkgs.mkalias
         ];
 
