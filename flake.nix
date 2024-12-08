@@ -35,11 +35,6 @@
           pkgs.pure-prompt
           pkgs.gh
           pkgs.mkalias
-          pkgs.alacritty
-          pkgs.vscode
-          pkgs.postman
-          pkgs.maccy
-          pkgs.jetbrains.idea-community
         ];
 
       # Fonts
@@ -56,7 +51,13 @@
               "z"
               "zsh-autosuggestions"
           ];
-          casks = [];
+          casks = [
+            "visual-studio-code"
+            "iterm2"
+            "intellij-idea-ce"
+            "maccy"
+            "postman"
+          ];
           masApps = {};
           onActivation.cleanup = "zap";
           onActivation.autoUpdate = true;
@@ -76,7 +77,7 @@
               "/System/Applications/Launchpad.app"
               "/System/Applications/Messages.app"
               "/System/Applications/Calendar.app"
-              "${pkgs.alacritty}/Applications/Alacritty.app"
+              "/Applications/Iterm.app"
               "/Applications/Safari.app"
               "/System/Applications/Notes.app"
               "/Applications/Spotify.app"
@@ -91,7 +92,7 @@
             FXEnableExtensionChangeWarning = false;
           };
           NSGlobalDomain = {
-            "com.apple.keyboard.fnState" = true;
+            "com.apple.keyboard.fnState" = false;
           };
       };
 
