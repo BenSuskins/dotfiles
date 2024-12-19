@@ -36,6 +36,7 @@
           # CLI Tools
           pkgs.neovim
           pkgs.gh
+          pkgs.wget
           # Shell config
           pkgs.pure-prompt
           # Misc
