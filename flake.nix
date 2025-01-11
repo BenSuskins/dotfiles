@@ -37,6 +37,7 @@
           pkgs.neovim
           pkgs.gh
           pkgs.wget
+          pkgs.go
           # Shell config
           pkgs.pure-prompt
           # Misc
