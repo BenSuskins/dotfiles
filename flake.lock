@@ -17,6 +17,26 @@
         "type": "github"
       }
     },
+    "home-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1738448366,
+        "narHash": "sha256-4ATtQqBlgsGqkHTemta0ydY6f7JBRXz4Hf574NHQpkg=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "18fa9f323d8adbb0b7b8b98a8488db308210ed93",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "type": "github"
+      }
+    },
     "homebrew-bundle": {
       "flake": false,
       "locked": {
@@ -36,11 +56,11 @@
     "homebrew-cask": {
       "flake": false,
       "locked": {
-        "lastModified": 1738438906,
-        "narHash": "sha256-ANqH1TNgX1pyIuBxSCEpO13imYDcykfE6Wh+tzUrn4A=",
+        "lastModified": 1738533834,
+        "narHash": "sha256-/hcoPf2NBAVWvKxDQnyvsbAvWSKrzdDmuS+UExrMTOU=",
         "owner": "homebrew",
         "repo": "homebrew-cask",
-        "rev": "cdcccac7b78a549780c95de0eb29bfc407c61cc4",
+        "rev": "4a321ddd7855818a04b2b06f60c38b021ce0c85a",
         "type": "github"
       },
       "original": {
@@ -52,11 +72,11 @@
     "homebrew-core": {
       "flake": false,
       "locked": {
-        "lastModified": 1738433964,
-        "narHash": "sha256-3MAHuhUwvNcG2KeJd82cQVBvpQnJnsA7pzeuwr3JqNY=",
+        "lastModified": 1738531379,
+        "narHash": "sha256-QMy2HiF5TCaryAUSugX7JsWl8RiUsf7zuCQZPL9kSoI=",
         "owner": "homebrew",
         "repo": "homebrew-core",
-        "rev": "b7ff56c0cf3ae678b1681fccba42fef4d2882c61",
+        "rev": "f970d1cf38303a76a1a783249ccc3bcd941c6556",
         "type": "github"
       },
       "original": {
@@ -154,11 +174,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1738297584,
-        "narHash": "sha256-AYvaFBzt8dU0fcSK2jKD0Vg23K2eIRxfsVXIPCW9a0E=",
+        "lastModified": 1738422722,
+        "narHash": "sha256-Q4vhtbLYWBUnjWD4iQb003Lt+N5PuURDad1BngGKdUs=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "9189ac18287c599860e878e905da550aa6dec1cd",
+        "rev": "102a39bfee444533e6b4e8611d7e92aa39b7bec1",
         "type": "github"
       },
       "original": {
@@ -170,6 +190,7 @@
     },
     "root": {
       "inputs": {
+        "home-manager": "home-manager",
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",

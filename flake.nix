@@ -7,6 +7,9 @@
     nix-darwin.url = "github:LnL7/nix-darwin";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
 
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     nix-homebrew.url = "github:zhaofengli-wip/nix-homebrew";
     homebrew-core = {
       url = "github:homebrew/homebrew-core";
@@ -22,7 +25,7 @@
     };
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, }:
+  outputs = inputs@{ self, nix-darwin, home-manager, nixpkgs, nix-homebrew, homebrew-core, homebrew-cask, homebrew-bundle, }:
   let
     configuration = { pkgs, config, ... }: {
 
@@ -149,7 +152,13 @@
     # $ darwin-rebuild build --flake .#Bens-MacBook-Pro
     darwinConfigurations."Bens-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [ 
-         configuration
+        configuration
+        # home-manager.darwinModules.home-manager
+        #   {
+        #     home-manager.useGlobalPkgs = true;
+        #     home-manager.useUserPackages = true;
+        #     home-manager.users.bensuskins = import ./home.nix;            
+        #   }
          nix-homebrew.darwinModules.nix-homebrew
           {
             nix-homebrew = {
