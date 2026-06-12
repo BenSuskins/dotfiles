@@ -27,10 +27,6 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
-    homebrew-s-sigdel-tap = {
-      url = "github:S-Sigdel/homebrew-tap";
-      flake = false;
-    };
     claude-code = {
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,7 +45,6 @@
       homebrew-bundle,
       homebrew-core,
       homebrew-cask,
-      homebrew-s-sigdel-tap,
       home-manager,
       mac-app-util,
       nixpkgs,
@@ -114,7 +109,6 @@
                   "homebrew/homebrew-core" = homebrew-core;
                   "homebrew/homebrew-cask" = homebrew-cask;
                   "homebrew/homebrew-bundle" = homebrew-bundle;
-                  "S-Sigdel/tap" = homebrew-s-sigdel-tap;
                 };
                 mutableTaps = false;
                 autoMigrate = true;

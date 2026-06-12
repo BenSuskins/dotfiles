@@ -241,22 +241,6 @@
         "type": "github"
       }
     },
-    "homebrew-s-sigdel-tap": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1781244915,
-        "narHash": "sha256-r7sQYxCChzPSPcayHkH9MU3kl7ctCnNJWgW3fJS/2S8=",
-        "owner": "S-Sigdel",
-        "repo": "homebrew-tap",
-        "rev": "8d733f734f8f8e3d7c5f8ade684924f705299b86",
-        "type": "github"
-      },
-      "original": {
-        "owner": "S-Sigdel",
-        "repo": "homebrew-tap",
-        "type": "github"
-      }
-    },
     "mac-app-util": {
       "inputs": {
         "cl-nix-lite": "cl-nix-lite",
@@ -402,7 +386,6 @@
         "homebrew-bundle": "homebrew-bundle",
         "homebrew-cask": "homebrew-cask",
         "homebrew-core": "homebrew-core",
-        "homebrew-s-sigdel-tap": "homebrew-s-sigdel-tap",
         "mac-app-util": "mac-app-util",
         "nix-homebrew": "nix-homebrew",
         "nixpkgs": "nixpkgs_5"
