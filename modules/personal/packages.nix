@@ -18,6 +18,7 @@ shared-packages
 
   # AI
   claude-code
+  herdr
 
   # Misc
   shottr

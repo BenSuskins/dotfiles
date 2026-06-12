@@ -27,8 +27,16 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    homebrew-s-sigdel-tap = {
+      url = "github:S-Sigdel/homebrew-tap";
+      flake = false;
+    };
     claude-code = {
       url = "github:sadjow/claude-code-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    herdr = {
+      url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -41,10 +49,12 @@
       homebrew-bundle,
       homebrew-core,
       homebrew-cask,
+      homebrew-s-sigdel-tap,
       home-manager,
       mac-app-util,
       nixpkgs,
       claude-code,
+      herdr,
     }:
     let
       userInfo = {
@@ -91,7 +101,10 @@
             nix-homebrew.darwinModules.nix-homebrew
             mac-app-util.darwinModules.default
             {
-              nixpkgs.overlays = [ claude-code.overlays.default ];
+              nixpkgs.overlays = [
+                claude-code.overlays.default
+                herdr.overlays.default
+              ];
             }
             {
               nix-homebrew = {
@@ -101,6 +114,7 @@
                   "homebrew/homebrew-core" = homebrew-core;
                   "homebrew/homebrew-cask" = homebrew-cask;
                   "homebrew/homebrew-bundle" = homebrew-bundle;
+                  "S-Sigdel/tap" = homebrew-s-sigdel-tap;
                 };
                 mutableTaps = false;
                 autoMigrate = true;
