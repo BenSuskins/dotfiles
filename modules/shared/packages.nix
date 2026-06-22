@@ -17,19 +17,22 @@ with pkgs;
   # Java
   jdk
   jetbrains.idea
-  
+
   # Node
   nodejs_22
   bun
+
+  # Python
+  uv
 
   # Containers
   podman
   podman-compose
   podman-desktop
-  
+
   # Nix
   nixfmt
-  
+
   # Git
   gh
   lazygit

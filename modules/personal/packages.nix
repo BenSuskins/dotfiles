@@ -15,6 +15,7 @@ shared-packages
 
   # Communication Tools
   discord
+  telegram-desktop
 
   # AI
   claude-code
