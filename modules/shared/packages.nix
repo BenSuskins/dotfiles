@@ -25,11 +25,6 @@ with pkgs;
   # Python
   uv
 
-  # Containers
-  podman
-  podman-compose
-  podman-desktop
-
   # Nix
   nixfmt
 
