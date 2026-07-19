@@ -3,6 +3,10 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # Pinned to the last rev with a cached darwin starship build; the current
+    # unstable starship (1.26.0) has no darwin binary and fails to link on
+    # macOS 26 (cctools ld64 crash). Drop this once 1.26.0 lands in the cache.
+    nixpkgs-starship.url = "github:nixos/nixpkgs/80d591ed473cfc46329932c2aadac9b435342c7c";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -48,6 +52,7 @@
       home-manager,
       mac-app-util,
       nixpkgs,
+      nixpkgs-starship,
       claude-code,
       herdr,
     }:
@@ -99,6 +104,9 @@
               nixpkgs.overlays = [
                 claude-code.overlays.default
                 herdr.overlays.default
+                (final: prev: {
+                  starship = nixpkgs-starship.legacyPackages.${system}.starship;
+                })
               ];
             }
             {

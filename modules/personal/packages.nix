@@ -15,11 +15,11 @@ shared-packages
 
   # Communication Tools
   discord
-  telegram-desktop
 
   # AI
   claude-code
-  herdr
+  codexbar
+  codex
 
   # Misc
   shottr
