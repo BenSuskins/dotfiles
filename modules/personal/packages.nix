@@ -20,6 +20,7 @@ shared-packages
   claude-code
   codexbar
   codex
+  repobar
 
   # Misc
   shottr
