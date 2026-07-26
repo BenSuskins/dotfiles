@@ -11,4 +11,5 @@ shared-casks
 
   # Productivity Tools
   "chatgpt"
+  "repobar"
 ]
