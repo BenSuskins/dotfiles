@@ -12,4 +12,6 @@ shared-casks
   # Productivity Tools
   "chatgpt"
   "repobar"
+  "discord"
+  "tailscale"
 ]

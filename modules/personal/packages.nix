@@ -13,9 +13,6 @@ shared-packages
   # Terraform
   terraform
 
-  # Communication Tools
-  discord
-
   # AI
   claude-code
   codexbar
