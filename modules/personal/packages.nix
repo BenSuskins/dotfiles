@@ -23,5 +23,4 @@ shared-packages
 
   # Misc
   shottr
-  tailscale
 ]
