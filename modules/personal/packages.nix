@@ -13,6 +13,9 @@ shared-packages
   # Terraform
   terraform
 
+  # ESP
+  platformio
+
   # AI
   claude-code
   codexbar
