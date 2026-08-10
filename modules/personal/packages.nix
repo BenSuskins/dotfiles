@@ -17,7 +17,6 @@ shared-packages
   platformio
 
   # AI
-  claude-code
   codexbar
   codex
 

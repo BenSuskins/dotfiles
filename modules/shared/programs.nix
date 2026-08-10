@@ -10,6 +10,7 @@
     enable = true;
   };
 
+  claude-code = import ../shared/claude-code.nix { inherit pkgs hostRole; };
   neovim = import ../shared/neovim.nix { inherit pkgs; };
   tmux = import ../shared/tmux.nix { inherit pkgs; };
   direnv = import ../shared/direnv.nix;

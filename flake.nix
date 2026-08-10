@@ -35,10 +35,6 @@
       url = "github:can1357/homebrew-tap";
       flake = false;
     };
-    claude-code = {
-      url = "github:sadjow/claude-code-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     herdr = {
       url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -58,7 +54,6 @@
       mac-app-util,
       nixpkgs,
       nixpkgs-starship,
-      claude-code,
       herdr,
     }:
     let
@@ -107,7 +102,6 @@
             mac-app-util.darwinModules.default
             {
               nixpkgs.overlays = [
-                claude-code.overlays.default
                 herdr.overlays.default
                 (final: prev: {
                   starship = nixpkgs-starship.legacyPackages.${system}.starship;
