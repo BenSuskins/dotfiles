@@ -5,6 +5,11 @@
   ignores = [
     "*.swp"
     ".envrc"
+    ".claude"
+    "**/.claude/settings.local.json"
+    "CLAUDE.md"
+    "DESIGN.md"
+    "plans/"
   ];
   signing.format = null;
   settings = {
@@ -63,7 +68,6 @@
     };
     init.defaultBranch = "main";
     core.autocrlf = "input";
-    core.excludesfile = "~/.gitignore_global";
     pull.rebase = true;
     pull.ff = "only";
     rebase.autoStash = true;
