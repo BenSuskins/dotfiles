@@ -12,5 +12,5 @@ shared-casks
   # Productivity Tools
   "chatgpt"
   "discord"
-  "tailscale"
+  "tailscale-app"
 ]
