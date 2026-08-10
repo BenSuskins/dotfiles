@@ -1,12 +1,15 @@
-{
-  NAS_SERVER_IP = "192.168.0.100";
-  MEDIA_SERVER_IP = "192.168.0.201";
-  DOCKER_SERVER_IP = "192.168.0.202";
-  GAME_SERVER_IP = "192.168.0.103";
-  MONITOR_SERVER_IP = "192.168.0.203";
-  DEVELOPMENT_SERVER_IP = "192.168.0.204";
-  BUMBLEBEE_SERVER_IP = "192.168.0.200";
+{ lib }:
 
+let
+  hosts = import ./hosts.nix;
+
+  serverAddresses = lib.mapAttrs' (name: host: {
+    name = "${lib.toUpper name}_SERVER_IP";
+    value = host.ip;
+  }) hosts;
+in
+serverAddresses
+// {
   EDITOR = "nvim";
   VISUAL = "$EDITOR";
 }

@@ -1,5 +1,13 @@
-{ hostRole }:
+{ hostRole, lib }:
 
+let
+  hosts = import ./hosts.nix;
+
+  sshAliases = lib.mapAttrs' (name: host: {
+    name = "ssh${name}";
+    value = "ssh -i ~/.ssh/homelab ${host.user}@${host.ip}";
+  }) (lib.filterAttrs (_: host: host.user != null) hosts);
+in
 {
   # General
   l = "eza -lah";
@@ -26,12 +34,6 @@
   rebuild = "cd ~/workspace/nixos-config && darwin-rebuild build --flake .#${hostRole}";
   switch = "cd ~/workspace/nixos-config && sudo darwin-rebuild switch --flake .#${hostRole}";
   compare = "cd ~/workspace/nixos-config && nix store diff-closures /run/current-system ./result";
-
-  # SSH
-  sshmedia = "ssh -i ~/.ssh/homelab mediaserver@$MEDIA_SERVER_IP";
-  sshdocker = "ssh -i ~/.ssh/homelab docker@$DOCKER_SERVER_IP";
-  sshgame = "ssh -i ~/.ssh/homelab gameserver@$GAME_SERVER_IP";
-  sshmonitor = "ssh -i ~/.ssh/homelab monitor@$MONITOR_SERVER_IP";
-  sshdevelopment = "ssh -i ~/.ssh/homelab development@$DEVELOPMENT_SERVER_IP";
-  sshbumblebee = "ssh -i ~/.ssh/homelab bumblebee@$BUMBLEBEE_SERVER_IP";
 }
+# SSH — derived from ./hosts.nix
+// sshAliases

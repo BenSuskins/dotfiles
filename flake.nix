@@ -31,6 +31,10 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    homebrew-can1357 = {
+      url = "github:can1357/homebrew-tap";
+      flake = false;
+    };
     claude-code = {
       url = "github:sadjow/claude-code-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,6 +53,7 @@
       homebrew-bundle,
       homebrew-core,
       homebrew-cask,
+      homebrew-can1357,
       home-manager,
       mac-app-util,
       nixpkgs,
@@ -117,6 +122,7 @@
                   "homebrew/homebrew-core" = homebrew-core;
                   "homebrew/homebrew-cask" = homebrew-cask;
                   "homebrew/homebrew-bundle" = homebrew-bundle;
+                  "can1357/homebrew-tap" = homebrew-can1357;
                 };
                 mutableTaps = false;
                 autoMigrate = true;

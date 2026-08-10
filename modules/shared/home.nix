@@ -56,8 +56,7 @@ in
       upgrade = true;
       autoUpdate = true;
     };
-    brews = [
-    ];
+    brews = pkgs.callPackage ../${hostRole}/brews.nix { };
     masApps = {
     };
   };
