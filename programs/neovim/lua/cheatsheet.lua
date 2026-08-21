@@ -64,7 +64,8 @@ local sections = {
     "The editor",
     {
       { "<leader>K", "This sheet" },
-      { "<leader>.", "Scratch buffer for this project" },
+      { "<leader>.", "Scratch buffer for this filetype" },
+      { "<leader>S", "Pick from every scratch buffer" },
       { "<leader>qs", "Restore the last session here" },
       { "<leader>bd", "Close buffer, keep the window" },
       { "<leader>l", "Plugin manager" },

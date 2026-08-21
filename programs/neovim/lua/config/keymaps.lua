@@ -128,6 +128,11 @@ end, "Close buffer, keep the window")
 map("n", "<leader>.", function()
   Snacks.scratch()
 end, "Scratch buffer")
+-- Scratch files are keyed on filetype, directory, and git branch, so you end
+-- up with several. This lists them.
+map("n", "<leader>S", function()
+  Snacks.scratch.select()
+end, "Pick a scratch buffer")
 map("n", "<leader>z", function()
   Snacks.zen()
 end, "Zen mode")
