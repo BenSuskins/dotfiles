@@ -1,31 +1,7 @@
 # ─────────────────────────────────────────
 # Appearance
 # ─────────────────────────────────────────
-# IntelliJ IDEA New UI Dark, sampled from a GoLand window. The same palette
-# drives Neovim in programs/neovim/lua/plugins/colorscheme.lua. Starship uses
-# named ANSI colours, so the prompt follows this without any config of its own.
-background = #191a1d
-foreground = #bcbec4
-selection-background = #33353a
-selection-foreground = #bcbec4
-cursor-color = #bcbec4
-
-palette = 0=#2b2d30
-palette = 1=#f75464
-palette = 2=#6aab73
-palette = 3=#cf8e6d
-palette = 4=#56a8f5
-palette = 5=#c77dbb
-palette = 6=#2aacb8
-palette = 7=#bcbec4
-palette = 8=#7a7e85
-palette = 9=#ff7a85
-palette = 10=#7fc088
-palette = 11=#e0a17f
-palette = 12=#6fb8ff
-palette = 13=#d68fcc
-palette = 14=#4cc4d0
-palette = 15=#dfe1e5
+theme = "snazzy"
 
 window-height = 27
 window-width = 118
@@ -46,7 +22,7 @@ font-family = "JetBrainsMono Nerd Font Mono"
 
 # Splits
 unfocused-split-opacity = 0.55
-split-divider-color = #33353a
+split-divider-color = #44475a
 
 # ─────────────────────────────────────────
 # Behaviour
