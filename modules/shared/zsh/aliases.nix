@@ -22,6 +22,7 @@ in
 
   # Shortcuts
   g = "lazygit";
+  vimhjkl = "uv run --project ~/workspace/vimhjkl vimhjkl";
 
   # Utility
   copy = "pbcopy";
