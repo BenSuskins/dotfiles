@@ -1,10 +1,12 @@
 -- A statusline in the same spirit as the starship prompt: no separators,
--- no mode block, and colour only where it carries meaning.
+-- no mode block, and colour only where it carries meaning. Invariant ships a
+-- lifted StatusLine; this keeps the bar the same colour as the buffer so the
+-- eye only sees the text.
 return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function()
-      local flat = { fg = "#7a7e85", bg = "#191a1d" }
+      local flat = { fg = "#7b7468", bg = "#191a1c" }
       local theme = {}
       for _, mode in ipairs({ "normal", "insert", "visual", "replace", "command", "inactive" }) do
         theme[mode] = { a = flat, b = flat, c = flat }
