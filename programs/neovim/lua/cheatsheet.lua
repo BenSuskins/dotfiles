@@ -71,31 +71,39 @@ local sections = {
     },
   },
 }
+-- `add` returns the 0-based index of the line it just appended, and `mark`
+-- takes that index. The two used to be coupled through #lines, which pointed
+-- at the wrong line whenever a blank line followed the one being highlighted.
 local function render()
   local width = 60
-  local lines = { "", "  Neovim Keys", "  " .. string.rep("═", width), "" }
-  local marks = {}
+  local lines, marks = {}, {}
 
-  local function mark(group, column)
-    marks[#marks + 1] = { line = #lines - 1, group = group, column = column }
+  local function add(text)
+    lines[#lines + 1] = text
+    return #lines - 1
   end
 
-  mark("Title", { 2, 13 })
+  local function mark(line, group, from, to)
+    marks[#marks + 1] = { line = line, group = group, from = from, to = to }
+  end
+
+  add("")
+  mark(add("  Neovim Keys"), "Title", 2, 13)
+  mark(add("  " .. string.rep("═", width)), "Comment", 0, -1)
+  add("")
 
   for _, section in ipairs(sections) do
     local title, rows = section[1], section[2]
-    lines[#lines + 1] = "  " .. title
-    mark("Statement", { 2, 2 + #title })
-    lines[#lines + 1] = "  " .. string.rep("─", width)
-    mark("Comment", { 0, -1 })
+    mark(add("  " .. title), "Statement", 2, 2 + #title)
+    mark(add("  " .. string.rep("─", width)), "Comment", 0, -1)
 
     for _, row in ipairs(rows) do
       local key, description = row[1], row[2]
-      lines[#lines + 1] = string.format("  %-22s │ %s", key, description)
-      mark("Type", { 2, 24 })
-      mark("Comment", { 24, 27 })
+      local line = add(string.format("  %-22s │ %s", key, description))
+      mark(line, "Type", 2, 24)
+      mark(line, "Comment", 24, 24 + #" │")
     end
-    lines[#lines + 1] = ""
+    add("")
   end
 
   return lines, marks
@@ -106,12 +114,20 @@ local function open()
   local buffer = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_set_lines(buffer, 0, -1, false, lines)
 
+  -- Columns are byte offsets, and the box-drawing characters are three bytes
+  -- each. Clamp every mark to the line it sits on rather than trusting the
+  -- arithmetic above.
   local namespace = vim.api.nvim_create_namespace("cheatsheet")
   for _, m in ipairs(marks) do
-    vim.api.nvim_buf_set_extmark(buffer, namespace, m.line, m.column[1], {
-      end_col = m.column[2] < 0 and #lines[m.line + 1] or m.column[2],
-      hl_group = m.group,
-    })
+    local length = #lines[m.line + 1]
+    local from = math.min(m.from, length)
+    local to = m.to < 0 and length or math.min(m.to, length)
+    if to > from then
+      vim.api.nvim_buf_set_extmark(buffer, namespace, m.line, from, {
+        end_col = to,
+        hl_group = m.group,
+      })
+    end
   end
 
   vim.bo[buffer].modifiable = false

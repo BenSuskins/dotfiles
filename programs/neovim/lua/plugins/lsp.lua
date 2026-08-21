@@ -36,15 +36,38 @@ return {
         settings = { Lua = { workspace = { checkThirdParty = false } } },
       })
 
+      -- SchemaStore carries the catalogue that turns a .yaml file into a
+      -- known shape: GitHub Actions workflows, docker-compose, k8s manifests.
+      -- Without it these two servers only check that the file is well formed.
+      vim.lsp.config("jsonls", {
+        settings = {
+          json = { schemas = require("schemastore").json.schemas(), validate = { enable = true } },
+        },
+      })
+
+      vim.lsp.config("yamlls", {
+        settings = {
+          yaml = {
+            schemaStore = { enable = false, url = "" }, -- SchemaStore.nvim supplies it
+            schemas = require("schemastore").yaml.schemas(),
+          },
+        },
+      })
+
       vim.lsp.enable({
         "gopls",
         "kotlin_language_server",
         "marksman", -- markdown
         "nil_ls", -- nix
         "lua_ls",
+        "jsonls",
+        "yamlls",
       })
     end,
   },
+
+  -- The schema catalogue behind jsonls and yamlls.
+  { "b0o/SchemaStore.nvim", version = false },
 
   -- lua_ls learns the Neovim API, so editing this config gets completion.
   { "folke/lazydev.nvim", ft = "lua", opts = {} },
