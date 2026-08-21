@@ -1,26 +1,26 @@
 -- The keys are all there; knowing they exist is the hard part. This is the
--- same sheet as `keys` in modules/shared/zsh/functions.sh — sections, a key
--- column, a description column — for Neovim instead of Ghostty.
+-- same sheet as `keys` in modules/shared/zsh/functions.sh -- sections, a key
+-- column, a description column -- for Neovim instead of Ghostty.
 --
--- Hand-written on purpose. Generating it from the live keymap table would
--- never go stale, but it would list two hundred keys when the point is the
--- twenty that matter. Add a row when you learn one worth keeping.
+-- Every row here is bound in lua/config/keymaps.lua, and every key in that
+-- file is a row here. Change one, change the other.
 --
--- <leader>? already belongs to LazyVim's buffer-local keymap popup.
+-- Open it with <leader>K.
 local sections = {
   {
     "Code navigation",
     {
       { "gd", "Go to definition" },
       { "gI", "Go to implementation" },
-      { "gr", "Find references (opens Trouble)" },
       { "gy", "Go to type definition" },
+      { "gr", "Find references (opens Trouble)" },
       { "K", "Hover documentation" },
       { "<leader>ca", "Code action" },
       { "<leader>cr", "Rename symbol" },
-      { "<leader>cs", "Symbols in file" },
+      { "<leader>cf", "Format buffer" },
       { "]] / [[", "Next / previous use of this word" },
       { "<C-o> / <C-i>", "Jump back / forward" },
+      { "af / if", "Select a function / its body" },
     },
   },
   {
@@ -28,9 +28,13 @@ local sections = {
     {
       { "<leader><space>", "Find file in project" },
       { "<leader>/", "Grep across project" },
-      { "<leader>e", "File explorer" },
       { "<leader>,", "Switch buffer" },
+      { "<leader>e", "File explorer" },
+      { "<leader>ss", "Symbols in this file" },
       { "<leader>sr", "Search and replace across files" },
+      { "<leader>st", "TODO comments" },
+      { "<leader>sh", "Search the help" },
+      { "<leader>sk", "Search the keymaps" },
       { "s", "Flash jump to any visible spot" },
     },
   },
@@ -40,7 +44,7 @@ local sections = {
       { "<leader>um", "Toggle in-buffer rendering" },
       { "<leader>uc", "Toggle conceal, to see raw markup" },
       { "<leader>ss", "Jump to a heading" },
-      { ":MarkdownPreview", "Open the browser preview" },
+      { "<leader>z", "Zen mode, one centred column" },
     },
   },
   {
@@ -49,15 +53,24 @@ local sections = {
       { "]h / [h", "Next / previous change" },
       { "<leader>ghs", "Stage hunk" },
       { "<leader>ghr", "Reset hunk" },
+      { "<leader>ghp", "Preview hunk" },
       { "<leader>ghb", "Blame line" },
       { "]d / [d", "Next / previous diagnostic" },
       { "<leader>cd", "Show diagnostic for this line" },
       { "<leader>xx", "All diagnostics in Trouble" },
-      { "<leader>st", "Search TODO comments" },
+    },
+  },
+  {
+    "The editor",
+    {
+      { "<leader>K", "This sheet" },
+      { "<leader>.", "Scratch buffer for this project" },
+      { "<leader>qs", "Restore the last session here" },
+      { "<leader>bd", "Close buffer, keep the window" },
+      { "<leader>l", "Plugin manager" },
     },
   },
 }
-
 local function render()
   local width = 60
   local lines = { "", "  Neovim Keys", "  " .. string.rep("═", width), "" }
@@ -123,12 +136,4 @@ local function open()
   end
 end
 
-return {
-  {
-    "folke/which-key.nvim",
-    optional = true,
-    keys = {
-      { "<leader>K", open, desc = "Keys cheatsheet" },
-    },
-  },
-}
+return { open = open }

@@ -1,8 +1,44 @@
--- Autocmds are automatically loaded on the VeryLazy event
--- Default autocmds that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/autocmds.lua
---
--- Add any additional autocmds here
--- with `vim.api.nvim_create_autocmd`
---
--- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
--- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+-- Behaviour that hangs off an event rather than a key.
+local function augroup(name)
+  return vim.api.nvim_create_augroup("ben_" .. name, { clear = true })
+end
+
+-- Flash the text you just yanked, so you can see what went to the register.
+vim.api.nvim_create_autocmd("TextYankPost", {
+  group = augroup("yank_highlight"),
+  callback = function()
+    vim.hl.on_yank({ timeout = 150 })
+  end,
+})
+
+-- Reopen a file on the line you left it.
+vim.api.nvim_create_autocmd("BufReadPost", {
+  group = augroup("last_position"),
+  callback = function(event)
+    local line = vim.api.nvim_buf_get_mark(event.buf, '"')[1]
+    if line > 1 and line <= vim.api.nvim_buf_line_count(event.buf) then
+      vim.cmd('normal! g`"zz')
+    end
+  end,
+})
+
+-- Prose wants wrapping and a spell check; code does not.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("prose"),
+  pattern = { "markdown", "gitcommit", "text" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.spell = true
+    vim.opt_local.linebreak = true
+  end,
+})
+
+-- Close scratch and help windows with q, the way every other panel closes.
+vim.api.nvim_create_autocmd("FileType", {
+  group = augroup("quick_close"),
+  pattern = { "help", "qf", "checkhealth", "lspinfo", "trouble" },
+  callback = function(event)
+    vim.bo[event.buf].buflisted = false
+    vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+  end,
+})

@@ -68,6 +68,7 @@ with pkgs;
   lazygit
 
   # Utilities
+  imagemagick # snacks.image renders pictures inline in Neovim
   maccy
   obsidian
 

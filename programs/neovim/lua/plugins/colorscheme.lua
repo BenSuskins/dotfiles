@@ -233,13 +233,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end,
 })
 
-return {
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = function()
-        vim.cmd.colorscheme("invariant")
-      end,
-    },
-  },
-}
+-- No plugin to install: the scheme is colors/invariant.vim in this directory.
+-- config/lazy.lua calls `colorscheme invariant` once the plugins are loaded.
+return {}

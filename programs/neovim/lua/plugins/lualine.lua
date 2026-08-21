@@ -2,7 +2,7 @@
 -- colour only where it carries meaning. Invariant ships a lifted StatusLine;
 -- this keeps the bar the same colour as the buffer so the eye only sees text.
 --
--- The mode is the one place colour earns its keep. LazyVim sets
+-- The mode is the one place colour earns its keep. options.lua sets
 -- showmode = false on the assumption the statusline reports it, so without
 -- this block nothing on screen names the mode at all.
 --

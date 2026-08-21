@@ -1,6 +1,4 @@
--- Markdown renders in the buffer rather than in a browser. LazyVim already
--- installs render-markdown and binds <leader>um to toggle it; this only sets
--- how it looks.
+-- Markdown renders in the buffer, not in a browser. <leader>um toggles it.
 --
 -- Headings are coloured text, not filled bars: the bar reads as a rendered
 -- document, which is wrong for a file you are editing. The colours themselves
@@ -8,6 +6,7 @@
 return {
   {
     "MeanderingProgrammer/render-markdown.nvim",
+    ft = "markdown",
     opts = {
       -- Show the markup on the line the cursor sits on, hide it everywhere
       -- else. Nothing disappears from under the cursor.
@@ -24,7 +23,7 @@ return {
         right_pad = 1,
         border = "thin",
       },
-      -- LazyVim turns checkboxes off. They are half of what a notes file is for.
+      -- Checkboxes are half of what a notes file is for.
       checkbox = { enabled = true },
       bullet = { icons = { "•", "◦", "▪", "▫" } },
       quote = { icon = "▎" },
