@@ -4,17 +4,6 @@
 -- splash screen, the notifications, the input prompt, and the large-file
 -- guard. Each is a field below, so what is on and what is off reads at a
 -- glance.
--- The dashboard only calls out to GitHub when the directory is actually a
--- GitHub checkout. Elsewhere the sections vanish and nothing hits the network.
-local function github_repo()
-  local root = vim.fs.root(vim.fn.getcwd(), ".git")
-  if not root or vim.fn.executable("gh") ~= 1 then
-    return false
-  end
-  local remote = vim.system({ "git", "-C", root, "remote", "get-url", "origin" }):wait()
-  return remote.code == 0 and remote.stdout:match("github%.com") ~= nil
-end
-
 return {
   {
     "folke/snacks.nvim",
@@ -66,39 +55,31 @@ return {
             { icon = " ", key = "q", desc = "Quit", action = ":qa" },
           },
         },
-        -- Naming `sections` replaces the default layout, so the header and the
-        -- keys have to be listed again alongside the new panels.
+        -- The snacks `advanced` preset: header and keys on the left, what you
+        -- were last working on down the right. Naming `sections` replaces the
+        -- default layout, so the header and the keys are listed again here.
+        --
+        -- The preset also runs `colorscript` for an ASCII flourish. That is a
+        -- package to install for a decoration, so it is left out.
         sections = {
           { section = "header" },
-          {
-            icon = " ",
-            title = "Open Pull Requests",
-            section = "terminal",
-            enabled = github_repo,
-            cmd = "gh pr list -L 3",
-            height = 4,
-            ttl = 5 * 60,
-            indent = 3,
-            padding = 1,
-            action = function()
-              vim.fn.jobstart("gh pr list --web", { detach = true })
-            end,
-          },
-          {
-            icon = " ",
-            title = "Open Issues",
-            section = "terminal",
-            enabled = github_repo,
-            cmd = "gh issue list -L 3",
-            height = 4,
-            ttl = 5 * 60,
-            indent = 3,
-            padding = 1,
-            action = function()
-              vim.fn.jobstart("gh issue list --web", { detach = true })
-            end,
-          },
           { section = "keys", gap = 1, padding = 1 },
+          { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+          { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+          {
+            pane = 2,
+            icon = " ",
+            title = "Git Status",
+            section = "terminal",
+            enabled = function()
+              return Snacks.git.get_root() ~= nil
+            end,
+            cmd = "git status --short --branch --renames",
+            height = 5,
+            padding = 1,
+            ttl = 5 * 60,
+            indent = 3,
+          },
           { section = "startup" },
         },
       },
