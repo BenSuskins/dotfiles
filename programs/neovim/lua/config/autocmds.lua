@@ -42,3 +42,27 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
   end,
 })
+
+-- Light the cursor line in the window you are actually in, and nowhere else.
+-- Without this the line stays lit in every window at once, so opening a float
+-- leaves a bright row glowing behind it and the cursor looks lost.
+vim.api.nvim_create_autocmd({ "WinEnter", "BufWinEnter" }, {
+  group = augroup("cursorline_follows_focus"),
+  callback = function()
+    if vim.bo.buftype == "" then
+      vim.wo.cursorline = true
+    end
+  end,
+})
+
+-- Only ordinary file windows. Plugin windows use the cursor line to mean
+-- something else -- the snacks picker draws its selection with it -- so
+-- leaving one must not switch it off.
+vim.api.nvim_create_autocmd("WinLeave", {
+  group = augroup("cursorline_leaves"),
+  callback = function()
+    if vim.bo.buftype == "" then
+      vim.wo.cursorline = false
+    end
+  end,
+})

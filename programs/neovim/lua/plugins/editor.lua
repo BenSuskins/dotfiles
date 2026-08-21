@@ -15,6 +15,14 @@ return {
       explorer = { enabled = true },
       input = { enabled = true },
 
+      -- snacks styles the scratch window `NormalFloat:Normal`, so it paints
+      -- with the editor background and reads as a hole cut in the buffer
+      -- rather than a panel above it. Clearing that lets it use NormalFloat,
+      -- the same lifted grey as every other float here.
+      styles = {
+        scratch = { wo = { winhighlight = "" } },
+      },
+
       -- Underline the other uses of the word under the cursor. ]] and [[ walk
       -- them. This is GoLand's "highlight usages in file".
       words = { enabled = true, notify_jump = false },
