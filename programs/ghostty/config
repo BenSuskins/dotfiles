@@ -11,6 +11,7 @@ background-opacity = 0.95
 background-blur = 20
 cursor-style = block
 cursor-style-blink = false
+adjust-cell-height = 20%
 
 # Font
 font-size = 13

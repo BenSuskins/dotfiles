@@ -19,6 +19,7 @@ with pkgs;
   gopls
   gofumpt
   gotools
+  golangci-lint
 
   # Java
   jdk
