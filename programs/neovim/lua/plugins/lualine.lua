@@ -38,7 +38,10 @@ return {
           globalstatus = true,
           component_separators = "",
           section_separators = "",
-          disabled_filetypes = { statusline = { "dashboard", "snacks_dashboard" } },
+          -- No disabled_filetypes. The dashboard hides the bar itself by
+          -- setting laststatus to 0, so blanking it here as well only leaves
+          -- an empty statusline that can still be on screen after the
+          -- dashboard hands its window over to a real file.
         },
         sections = {
           lualine_a = { { "mode", padding = { left = 1, right = 2 } } },

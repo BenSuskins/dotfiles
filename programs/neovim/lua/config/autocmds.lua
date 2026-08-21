@@ -66,3 +66,18 @@ vim.api.nvim_create_autocmd("WinLeave", {
     end
   end,
 })
+
+-- Leaving the dashboard hands its window straight to a real file, so nothing
+-- forces the statusline to be drawn again and the bar can stay blank. With
+-- showmode off, that leaves nothing on screen naming the mode.
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  group = augroup("statusline_returns"),
+  callback = function()
+    if vim.bo.buftype == "" and vim.bo.filetype ~= "snacks_dashboard" then
+      vim.o.laststatus = 3
+      pcall(function()
+        require("lualine").refresh({ place = { "statusline" } })
+      end)
+    end
+  end,
+})
