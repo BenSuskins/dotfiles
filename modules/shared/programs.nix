@@ -22,7 +22,6 @@
   };
   codex = import ../shared/codex.nix { inherit hostRole agents; };
   opencode = import ../shared/opencode.nix { inherit hostRole agents; };
-  neovim = import ../shared/neovim.nix { inherit pkgs; };
   tmux = import ../shared/tmux.nix { inherit pkgs; };
   direnv = import ../shared/direnv.nix;
   starship = import ../shared/starship.nix;

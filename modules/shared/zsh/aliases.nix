@@ -22,6 +22,8 @@ in
 
   # Shortcuts
   g = "lazygit";
+  vi = "nvim";
+  vim = "nvim";
   vimhjkl = "uv run --project ~/workspace/vimhjkl vimhjkl";
 
   # Utility

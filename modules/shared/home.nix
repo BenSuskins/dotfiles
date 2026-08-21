@@ -74,7 +74,14 @@ in
       }:
       {
         home = {
-          file = import ./files.nix { inherit lib hostRole agents; };
+          file = import ./files.nix {
+            inherit
+              config
+              lib
+              hostRole
+              agents
+              ;
+          };
           sessionPath = [
             "$HOME/.local/bin"
           ];

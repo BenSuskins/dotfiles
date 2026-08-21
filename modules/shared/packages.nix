@@ -67,6 +67,9 @@ with pkgs;
   gh
   lazygit
 
+  # Editor. Not programs.neovim: see modules/shared/neovim.nix.
+  neovim
+
   # Utilities
   imagemagick # snacks.image renders pictures inline in Neovim
   maccy
