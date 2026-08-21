@@ -4,7 +4,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     opts = function()
-      local flat = { fg = "#6272a4", bg = "#1e1f29" }
+      local flat = { fg = "#7a7e85", bg = "#191a1d" }
       local theme = {}
       for _, mode in ipairs({ "normal", "insert", "visual", "replace", "command", "inactive" }) do
         theme[mode] = { a = flat, b = flat, c = flat }
