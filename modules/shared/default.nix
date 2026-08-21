@@ -3,6 +3,7 @@
 {
   imports = [
     ./fonts.nix
+    ./nix-gc.nix
     ./system.nix
   ];
 
