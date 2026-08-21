@@ -1,6 +1,6 @@
 # Troubleshooting
 
-> Common issues and fixes for `nixos-config`. Organised by symptom.
+> Common issues and fixes for `dotfiles`. Organised by symptom.
 
 ## How to use this doc
 

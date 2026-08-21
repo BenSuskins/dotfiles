@@ -1,4 +1,4 @@
-# nixos-config
+# dotfiles
 
 > Declarative macOS configuration via Nix flakes, nix-darwin, and home-manager.
 
@@ -20,7 +20,7 @@ unmanaged apps are removed.
 ## Project Structure
 
 ```
-nixos-config/
+dotfiles/
 ├── flake.nix             # Entry point — defines `personal` and `work` Darwin configs
 ├── hosts/
 │   ├── personal/         # Host entry point importing relevant modules
@@ -43,8 +43,8 @@ nixos-config/
 ### Setup
 
 ```bash
-git clone git@github.com:bensuskins/nixos-config.git
-cd nixos-config
+git clone git@github.com:bensuskins/dotfiles.git
+cd dotfiles
 
 # First-time apply (before darwin-rebuild is available)
 nix run nix-darwin -- switch --flake .#personal   # or .#work

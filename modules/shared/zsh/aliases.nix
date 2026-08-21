@@ -29,11 +29,11 @@ in
   ports = "lsof -i -P -n | grep LISTEN";
 
   # Nix
-  nixconfig = "code ~/workspace/nixos-config";
+  nixconfig = "code ~/workspace/dotfiles";
   nixclean = "nix-collect-garbage";
-  rebuild = "cd ~/workspace/nixos-config && darwin-rebuild build --flake .#${hostRole}";
-  switch = "cd ~/workspace/nixos-config && sudo darwin-rebuild switch --flake .#${hostRole}";
-  compare = "cd ~/workspace/nixos-config && nix store diff-closures /run/current-system ./result";
+  rebuild = "cd ~/workspace/dotfiles && darwin-rebuild build --flake .#${hostRole}";
+  switch = "cd ~/workspace/dotfiles && sudo darwin-rebuild switch --flake .#${hostRole}";
+  compare = "cd ~/workspace/dotfiles && nix store diff-closures /run/current-system ./result";
 }
 # SSH — derived from ./hosts.nix
 // sshAliases
