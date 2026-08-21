@@ -13,7 +13,7 @@ local palette = {
   surface = "#1f2023", -- cursor line, the step between editor and popup
   popup = "#27282b",
   border = "#393a3c",
-  dim = "#7b7468", -- whitespace, indent guides
+  dim = "#7b7468", -- secondary text in panels
   comment = "#8a8578", -- Invariant paints comments pure white; too loud to read past
   muted = "#999999", -- line numbers, secondary text
   foreground = "#cfbfad",
@@ -70,8 +70,6 @@ local function overrides()
 
     Whitespace = { fg = p.surface },
     NonText = { fg = p.surface },
-    SnacksIndent = { fg = p.surface },
-    SnacksIndentScope = { fg = p.border },
 
     -- snacks: the picker and the explorer, which the scheme never touched.
     SnacksNormal = { fg = p.foreground, bg = p.popup },

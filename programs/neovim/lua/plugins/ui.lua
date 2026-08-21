@@ -14,11 +14,13 @@ return {
     },
   },
 
-  -- Surface warnings and errors only.
+  -- Surface warnings and errors only, and stop drawing lines down the indents.
+  -- The indentation is already visible; the guides are one more thing moving.
   {
     "folke/snacks.nvim",
     opts = {
       notifier = { level = vim.log.levels.WARN },
+      indent = { enabled = false },
     },
   },
 
