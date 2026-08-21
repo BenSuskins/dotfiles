@@ -15,6 +15,27 @@ introduce a second convention.
 - Use TDD in repos with a test harness. In config, infra, and scripting repos,
   verify by running the thing instead.
 
+# Writing
+
+Write in Simplified Technical English (ASD-STE100), governed by Zinsser's four
+principles: clarity, simplicity, brevity, humanity. This applies to everything
+you write — chat replies, docs, commit messages, PR bodies, code comments.
+
+- One meaning per word, one word per meaning. Never vary vocabulary for style.
+  Call the same thing the same name every time.
+- Use the active voice. Name the actor.
+- Use the simple present tense. Avoid future and perfect forms where the simple
+  form carries the meaning.
+- One instruction per sentence. Use the imperative for instructions.
+- Keep sentences short: 20 words for instructions, 25 for description.
+- Keep a paragraph to one topic and six sentences.
+- Keep articles in. Write "the file", not "file".
+- Do not stack more than three nouns together.
+- Do not use a gerund as a noun, and do not chain gerunds.
+- Cut every word that does no work. Prefer the short word to the long one.
+- No throat-clearing, no slang, no idiom, no undefined jargon.
+- Write to a person, not to a spec. Brevity is not curtness.
+
 # Tone and Behavior
 
 - Criticism is welcome. Tell me when I'm wrong or might be wrong, when there's a
@@ -28,8 +49,6 @@ introduce a second convention.
 
 # Planning
 
-- Prefer the AskUserQuestion tool when the decision has discrete options.
-  Plain-text questions are fine when the answer is open-ended.
 - For work spanning multiple steps or sessions, write the plan as markdown in
   `plans/` at the repo root. Skip the file for small, single-step changes.
 - `plans/` is scratch space — add it to `.gitignore` if it isn't already.
@@ -46,7 +65,7 @@ its MCP server (server name: `workboard`). Workboard is the source of truth for
 - Do **not** create a new project for work that already maps to an existing one
   — search first with `find_project`.
 - After finishing a substantial piece of work, or when I say we're done, run
-  `/workboard-status` to post what you did, link any new PRs, and refresh the
-  summary.
+  the `workboard-status` skill to post what you did, link any new PRs, and
+  refresh the summary.
 - If you hit something you can't fix (blocked, needs a human, external outage),
   raise it with `raise_warning` instead of silently moving on.

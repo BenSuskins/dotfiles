@@ -18,7 +18,6 @@ shared-packages
 
   # AI
   codexbar
-  codex
 
   # Misc
   shottr

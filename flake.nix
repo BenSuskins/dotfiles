@@ -39,6 +39,14 @@
       url = "github:ogulcancelik/herdr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    mattpocock-skills = {
+      url = "github:mattpocock/skills";
+      flake = false;
+    };
+    claude-plugins-official = {
+      url = "github:anthropics/claude-plugins-official";
+      flake = false;
+    };
   };
 
   outputs =
@@ -55,6 +63,8 @@
       nixpkgs,
       nixpkgs-starship,
       herdr,
+      mattpocock-skills,
+      claude-plugins-official,
     }:
     let
       userInfo = {
@@ -79,7 +89,11 @@
         darwin.lib.darwinSystem {
           inherit system;
           specialArgs = {
-            inherit self;
+            inherit self claude-plugins-official;
+            agents = import ./programs/agents {
+              inherit (nixpkgs) lib;
+              inherit mattpocock-skills;
+            };
             userInfo = userInfo.${host};
             hostRole = host;
           };

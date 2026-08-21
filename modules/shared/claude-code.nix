@@ -1,6 +1,13 @@
-{ pkgs, hostRole }:
+{
+  pkgs,
+  hostRole,
+  agents,
+  claude-plugins-official,
+}:
 
 let
+  inherit (pkgs) lib;
+
   statusline = pkgs.writeShellApplication {
     name = "claude-statusline";
     runtimeInputs = [
@@ -13,13 +20,21 @@ in
 {
   enable = hostRole == "personal";
 
-  context = ../../programs/claude/context.md;
+  context = agents.context.claude;
 
-  skills = {
-    workboard-digest = ../../programs/claude/skills/workboard-digest;
-    workboard-status = ../../programs/claude/skills/workboard-status;
-    workboard-triage = ../../programs/claude/skills/workboard-triage;
-  };
+  skills = agents.workboardSkills;
+
+  # Pinned in the flake rather than fetched from the marketplace. Loading a
+  # plugin here and in enabledPlugins would install it twice.
+  plugins =
+    lib.genAttrs [
+      "feature-dev"
+      "frontend-design"
+      "playground"
+    ] (name: "${claude-plugins-official}/plugins/${name}")
+    // {
+      mattpocock-skills = agents.mattpocockPlugin;
+    };
 
   mcpServers = {
     homelab = {
@@ -51,17 +66,17 @@ in
       command = "${statusline}/bin/claude-statusline";
     };
 
+    # The *-lsp entries carry no content of their own — Claude Code implements
+    # the LSP support internally and gates it on the marketplace name, so there
+    # is nothing to pin. The content-bearing plugins moved to `plugins` above.
     enabledPlugins = {
       "clangd-lsp@claude-plugins-official" = true;
-      "feature-dev@claude-plugins-official" = true;
-      "frontend-design@claude-plugins-official" = true;
       "gopls-lsp@claude-plugins-official" = true;
       "jdtls-lsp@claude-plugins-official" = true;
       "kotlin-lsp@claude-plugins-official" = true;
-      "mattpocock-skills@claude-plugins-official" = true;
-      "playground@claude-plugins-official" = true;
       "swift-lsp@claude-plugins-official" = true;
       "typescript-lsp@claude-plugins-official" = true;
+      "eli5@claude-community" = true;
     };
   };
 }

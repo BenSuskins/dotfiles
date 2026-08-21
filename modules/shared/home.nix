@@ -5,6 +5,8 @@
   home-manager,
   userInfo,
   hostRole,
+  agents,
+  claude-plugins-official,
   ...
 }:
 
@@ -72,7 +74,7 @@ in
       }:
       {
         home = {
-          file = import ./files.nix { inherit hostRole; };
+          file = import ./files.nix { inherit lib hostRole agents; };
           sessionPath = [
             "$HOME/.local/bin"
           ];
@@ -80,7 +82,15 @@ in
           packages = pkgs.callPackage ../${hostRole}/packages.nix { };
           stateVersion = "23.11";
         };
-        programs = import ./programs.nix { inherit pkgs userInfo hostRole; };
+        programs = import ./programs.nix {
+          inherit
+            pkgs
+            userInfo
+            hostRole
+            agents
+            claude-plugins-official
+            ;
+        };
       };
   };
 
