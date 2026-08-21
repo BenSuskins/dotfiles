@@ -29,6 +29,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.lang.yaml" },
     { import = "lazyvim.plugins.extras.lang.markdown" },
+    -- snacks already provides indent guides and scope highlighting
+    { import = "lazyvim.plugins.extras.ui.treesitter-context" },
     -- import/override with your plugins
     { import = "plugins" },
   },
