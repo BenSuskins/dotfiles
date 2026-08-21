@@ -12,6 +12,8 @@ shared-packages
 
   # Terraform
   terraform
+  terraform-ls
+  tflint
 
   # ESP
   platformio
