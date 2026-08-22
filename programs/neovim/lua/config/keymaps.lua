@@ -144,7 +144,7 @@ end, "Keys cheatsheet")
 map("n", "<leader>l", "<cmd>Lazy<cr>", "Plugin manager")
 -- The dashboard hides the statusline when it opens at startup, and nothing
 -- puts it back on the way in here, so this does it by hand.
-map("n", "<leader>d", function()
+map("n", "<leader>D", function()
   vim.o.laststatus = 0
   Snacks.dashboard()
 end, "Dashboard")
