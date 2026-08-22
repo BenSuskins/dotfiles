@@ -16,6 +16,9 @@ local opt = vim.opt
 opt.number = true
 opt.relativenumber = false
 opt.signcolumn = "number" -- git and diagnostic marks share the number column
+-- Two spaces between the number column and the text. `%s` keeps drawing the
+-- signs; without it a custom statuscolumn silently drops them.
+opt.statuscolumn = "%s%=%l  "
 opt.cursorline = true
 opt.scrolloff = 6 -- keep context above and below the cursor
 opt.wrap = false
