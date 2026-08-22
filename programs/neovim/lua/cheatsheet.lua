@@ -29,7 +29,7 @@ local sections = {
       { "<leader><space>", "Find file in project" },
       { "<leader>/", "Grep across project" },
       { "<leader>,", "Switch buffer" },
-      { "<leader>e", "File explorer" },
+      { "<leader>e", "File explorer: open, jump to, close" },
       { "<leader>ss", "Symbols in this file" },
       { "<leader>sr", "Search and replace across files" },
       { "<leader>st", "TODO comments" },

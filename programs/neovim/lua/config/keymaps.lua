@@ -31,8 +31,18 @@ end, "Grep across project")
 map("n", "<leader>,", function()
   Snacks.picker.buffers()
 end, "Switch buffer")
+-- Three states, one key: closed opens it, open but elsewhere jumps into it,
+-- open and focused closes it. Without the middle case there is no way back
+-- into the tree once you are editing a file.
 map("n", "<leader>e", function()
-  Snacks.explorer()
+  local explorer = Snacks.picker.get({ source = "explorer" })[1]
+  if not explorer then
+    Snacks.explorer()
+  elseif explorer:is_focused() then
+    explorer:close()
+  else
+    explorer:focus()
+  end
 end, "File explorer")
 map("n", "<leader>sr", "<cmd>GrugFar<cr>", "Search and replace across files")
 map("n", "<leader>ss", function()
