@@ -192,6 +192,16 @@ local function overrides()
     TodoFgHACK = { fg = p.warn },
     TodoFgNOTE = { fg = p.fn },
 
+    -- Heading text is coloured by treesitter, not by render-markdown, whose
+    -- `foregrounds` only reaches the icon it draws in place of the `#`. Both
+    -- have to agree or the icon and its heading are different colours.
+    ["@markup.heading.1.markdown"] = { fg = p.keyword, bold = true },
+    ["@markup.heading.2.markdown"] = { fg = p.fn, bold = true },
+    ["@markup.heading.3.markdown"] = { fg = p.type, bold = true },
+    ["@markup.heading.4.markdown"] = { fg = p.parameter, bold = true },
+    ["@markup.heading.5.markdown"] = { fg = p.typeParameter, bold = true },
+    ["@markup.heading.6.markdown"] = { fg = p.signature, bold = true },
+
     -- render-markdown: headings as coloured text, no filled bars.
     RenderMarkdownH1 = { fg = p.keyword, bold = true },
     RenderMarkdownH2 = { fg = p.fn, bold = true },
