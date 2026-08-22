@@ -108,6 +108,11 @@ local function overrides()
     SnacksDashboardDesc = { fg = p.foreground },
     SnacksDashboardKey = { fg = p.typeParameter },
     SnacksDashboardFooter = { fg = p.dim },
+    -- The dashboard links its directory column to NonText, which this file
+    -- paints one step off the background so end-of-buffer markers disappear.
+    -- Right for a tilde, wrong for a path you are meant to read.
+    SnacksDashboardDir = { fg = p.dim },
+    SnacksDashboardFile = { fg = p.number },
 
     -- blink.cmp
     BlinkCmpMenu = { fg = p.foreground, bg = p.popup },
