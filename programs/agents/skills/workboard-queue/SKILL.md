@@ -47,8 +47,10 @@ Never let the loop die on a single pipeline's failure — catch, record, continu
 ## Pipeline (per task)
 
 **1. Plan (subagent, main checkout, read-only).** Dispatch a research/explore
-subagent with: the task title, the project goal/summary, and instruction to
-produce an implementation plan — approach, files to touch, test strategy,
+subagent with: the task title **and description** (the description is the spec —
+if it is empty or too thin to act on, post an `add_update` asking the user to
+flesh it out and skip the task), plus the project goal/summary, and instruction
+to produce an implementation plan — approach, files to touch, test strategy,
 risks. It must not edit files. Return the plan as text.
 
 **2. Worktree.** Isolate the work so parallel pipelines can't collide:
