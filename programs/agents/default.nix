@@ -20,6 +20,7 @@ let
   );
 
   workboardSkills = {
+    workboard-accomplishments = ./skills/workboard-accomplishments;
     workboard-digest = ./skills/workboard-digest;
     workboard-status = ./skills/workboard-status;
     workboard-triage = ./skills/workboard-triage;

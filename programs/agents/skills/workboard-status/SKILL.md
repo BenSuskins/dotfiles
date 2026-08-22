@@ -7,10 +7,19 @@ description: Post a status update to the user's Workboard after finishing a codi
 
 You are finishing a work session in a repository. Record the work on the user's
 Workboard via the `workboard` MCP server (tools: `find_project`, `get_project`,
-`add_update`, `add_link`, `upsert_summary`, `update_project`, `add_task`).
+`add_update`, `add_link`, `upsert_summary`, `update_project`, `add_task`,
+`list_queued_tasks`, `claim_task`).
 
 If no `workboard` MCP tools are available, tell the user to connect it:
 `claude mcp add --transport http workboard http://localhost:8787/mcp`
+
+## Step 0 — Check the agent queue (session start)
+
+When this skill runs at the **start** of a session (not just the end), check for
+queued work first: call `list_queued_tasks` scoped to the project once resolved
+(Step 1). If tasks are queued and you have capacity, `claim_task` one before
+starting it — claiming marks it in_progress and stamps your agent name on the
+board. Mark claimed work `done` with `update_task` as you complete it.
 
 ## Step 1 — Resolve the project (monorepo-aware)
 

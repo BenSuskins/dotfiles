@@ -29,11 +29,14 @@ Markdown, scannable in under a minute. Structure:
 - Title: `## Digest — <date>` (daily) or `## Weekly digest — w/c <date>`.
 - **What moved**: 1–2 sentences per project that had activity — lead with
   outcome (shipped/merged/decided), not effort. Use PR/ticket state from the
-  snapshots (e.g. "cutover PR approved, unmerged for 3 days").
+  snapshots (e.g. "cutover PR approved, unmerged for 3 days"). Updates carry an
+  `author` (`user` vs `agent:<name>`): say who did it when it matters — the
+  user tracking their own week is part of the point.
 - **Quiet**: one line listing projects with no activity, if any. Flag anything
   active-but-silent for over a week.
 - **Suggested focus**: 2–4 numbered, concrete next actions ranked by impact.
-  "Land #4821" beats "keep making progress on payments".
+  "Land #4821" beats "keep making progress on payments". Queued-but-unclaimed
+  tasks (visible in updates/summaries) are fair game here.
 
 Ground every claim in the activity data. No filler, no praise, no restating
 project descriptions the user already knows.
