@@ -68,6 +68,7 @@ local sections = {
       { "<leader>S", "Pick from every scratch buffer" },
       { "<leader>qs", "Restore the last session here" },
       { "<leader>bd", "Close buffer, keep the window" },
+      { "<leader>d", "Back to the dashboard" },
       { "<leader>l", "Plugin manager" },
     },
   },
