@@ -62,10 +62,10 @@ its MCP server (server name: `workboard`). Workboard is the source of truth for
 
 - Before starting, call `find_project` / `get_project` to load existing context
   for the repo you're in.
-- At **session start**, check `list_queued_tasks` for the project you're
-  working in. If a task is queued and you take it on, `claim_task` it first —
-  this marks it in_progress under your name — then `update_task` to done when
-  finished.
+- Queued tasks are drained by the `workboard-queue` dispatcher skill — don't
+  pull queue work ad hoc. Run that skill with a project name when I ask to run
+  the queue: it claims tasks, plans and implements each in its own worktree via
+  subagents, and raises draft PRs.
 - Do **not** create a new project for work that already maps to an existing one
   — search first with `find_project`.
 - After finishing a substantial piece of work, or when I say we're done, run
