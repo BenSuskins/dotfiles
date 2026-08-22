@@ -94,33 +94,6 @@ return {
     },
   },
 
-  -- The popup that appears after <leader>. It is a reference for keys you half
-  -- remember, not the place to learn them; that is <leader>K.
-  {
-    "folke/which-key.nvim",
-    opts = {
-      delay = 400,
-      -- Groups first, then the loose keys. The default sorter puts groups
-      -- last, which reads as noise before structure.
-      sort = {
-        "local",
-        "order",
-        function(item)
-          return item.group and 0 or 1
-        end,
-        "alphanum",
-        "mod",
-      },
-      spec = {
-        { "<leader>c", group = "code" },
-        { "<leader>g", group = "git" },
-        { "<leader>s", group = "search" },
-        { "<leader>u", group = "toggle" },
-        { "<leader>q", group = "session" },
-      },
-    },
-  },
-
   -- Press s, type two characters, land there. This replaces most f, t, and /
   -- hopping once it is in your fingers.
   { "folke/flash.nvim", opts = {} },
