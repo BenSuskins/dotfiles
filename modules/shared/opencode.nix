@@ -10,6 +10,14 @@
   settings = {
     "$schema" = "https://opencode.ai/config.json";
 
+    # The same MCPJungle gateway the other clients use, by LAN IP. See the note
+    # in claude-code.nix for why the public hostname is not usable.
+    mcp.suskins = {
+      type = "remote";
+      url = "http://192.168.0.206:8090/mcp";
+      enabled = true;
+    };
+
     provider.openrouter.models = {
       # OpenRouter's current stealth model. Declared by hand because models.dev
       # (which opencode reads its catalogue from) does not carry stealth slugs,

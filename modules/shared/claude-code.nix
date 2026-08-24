@@ -36,15 +36,14 @@ in
       mattpocock-skills = agents.mattpocockPlugin;
     };
 
+  # One gateway (MCPJungle) in front of every server. Addressed by LAN IP, not
+  # through mcp.suskins.co.uk: Authelia guards that host including the
+  # /.well-known OAuth documents, so no client can discover how to authenticate.
+  # The cost is that MCP works on the home network only.
   mcpServers = {
-    homelab = {
-      command = "npx";
-      args = [
-        "-y"
-        "mcp-remote"
-        "http://192.168.0.206:8090/mcp"
-        "--allow-http"
-      ];
+    suskins = {
+      type = "http";
+      url = "http://192.168.0.206:8090/mcp";
     };
   };
 
