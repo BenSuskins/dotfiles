@@ -7,10 +7,18 @@ description: Post a status update to the user's Workboard after finishing a codi
 
 You are finishing a work session in a repository. Record the work on the user's
 Workboard via the `workboard` MCP server (tools: `find_project`, `get_project`,
-`add_update`, `add_link`, `upsert_summary`, `update_project`, `add_task`).
+`add_post`, `add_link`, `upsert_summary`, `update_project`, `add_task`,
+`add_task_comment`, `list_answers`, `ask_question`, `add_comment`).
 
 If no `workboard` MCP tools are available, tell the user to connect it:
 `claude mcp add --transport http workboard http://localhost:8787/mcp`
+
+## Step 0 — Read your replies first
+
+Call `list_answers` with your `agent_name`. It returns comments the user left on
+your posts and answers to your questions. Address anything waiting before you
+start new work — a reply may change what you were about to do. Reply in the
+thread with `add_comment` when you act on one.
 
 ## Step 1 — Resolve the project (monorepo-aware)
 
@@ -38,10 +46,17 @@ inferred).
 
 ## Step 3 — Post the update
 
-Call `add_update` with `agent_name` set to your agent identity. Body: 2–5
-sentences of markdown covering **what changed, why, current state (merged / in
-review / needs X), and anything blocking**. Write for the user reading their
-dashboard on Monday morning, not a commit log.
+Call `add_post` with `agent_name` set to your agent identity.
+
+Give it a `title` that carries the takeaway on its own — the board shows the
+title and an excerpt, and the full post has its own page.
+
+Write the `body` as a document, not a commit log: what changed, why, where it
+stands (merged / in review / needs X), and anything blocking. Use markdown
+properly — headings when there is more than one topic, a table when you are
+reporting state across several things, and a ```mermaid diagram when the shape
+of the work is clearer drawn than described. Write for the user reading their
+dashboard on Monday morning.
 
 ## Step 4 — Refresh the summary
 
@@ -53,10 +68,18 @@ project stands against its goal, then in-flight work, then risks/blockers.
 ## Step 5 — Housekeeping (only when warranted)
 
 - Work revealed a follow-up? `add_task`.
+- Worked a task this session? `add_task_comment` on it and move it with
+  `update_task` — `done` when it shipped, `blocked` when you got stuck (that
+  keeps your name on it, takes it out of the queue, and puts it in the board's
+  **Blocked** column). Say in the comment what you need to get moving; the
+  user's reply comes back through `list_answers` under `taskReplies`.
 - Project is now genuinely blocked / unblocked / done? `update_project` with the
   new `status` (and `health` if it changed). Don't churn status speculatively.
-- Something needs the **user's** intervention and you can't fix it (failing CI
-  you can't repair, a decision needed, a blocked dependency)? `raise_warning`
+- Need a **decision** from the user — which approach, which name, whether to
+  proceed? `ask_question` with the options and your recommendation, so a
+  one-word reply unblocks you. Their answer reaches you through `list_answers`.
+- Something is **broken** and needs the user, and you can't fix it (failing CI
+  you can't repair, a blocked dependency)? `raise_warning`
   with a concrete `suggested_action` — it appears prominently on the dashboard
   until resolved. If a warning you raised earlier no longer applies (check
   `get_project`'s `openWarnings`), `resolve_warning` it.

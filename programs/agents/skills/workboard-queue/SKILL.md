@@ -11,7 +11,8 @@ implement → draft PR → bookkeeping. Tasks are independent; run several pipel
 at once. Your own context stays small: never implement anything yourself.
 
 Requires the `workboard` MCP server (`find_project`, `get_project`,
-`list_queued_tasks`, `claim_task`, `add_link`, `add_update`, `update_task`,
+`list_queued_tasks`, `claim_task`, `add_link`, `add_post`, `update_task`,
+`add_task_comment`, `list_task_comments`, `list_answers`, `ask_question`,
 `raise_warning`) plus the Task tool for subagents. If unavailable, tell the
 user to connect it: `claude mcp add --transport http workboard http://localhost:8787/mcp`
 
@@ -46,10 +47,16 @@ Never let the loop die on a single pipeline's failure — catch, record, continu
 
 ## Pipeline (per task)
 
+**0. Read the thread.** `list_task_comments(task_id)` before planning. The
+description is the spec as filed; the thread is everything said since, including
+answers to a question a previous run left on the task.
+
 **1. Plan (subagent, main checkout, read-only).** Dispatch a research/explore
-subagent with: the task title **and description** (the description is the spec —
-if it is empty or too thin to act on, post an `add_update` asking the user to
-flesh it out and skip the task), plus the project goal/summary, and instruction
+subagent with: the task title, **description**, and thread (the description is
+the spec — if it is empty or too thin to act on, leave the question with
+`add_task_comment` and move the task to `blocked` with `update_task`, then skip
+it; the user's answer comes back through `list_answers` under `taskReplies` on a
+later run), plus the project goal/summary, and instruction
 to produce an implementation plan — approach, files to touch, test strategy,
 risks. It must not edit files. Return the plan as text.
 
@@ -81,17 +88,24 @@ test status, `Part of <project> queue`. Base: the repo's default branch.
 
 **5. Bookkeeping (workboard).**
 - `add_link` with the PR URL (kind inferred).
-- `add_update` — the check-in: task done, PR number, one-line what-changed,
-  test status. Author = your agent name.
+- `add_post` — the check-in. Title carries the outcome ("Task 42: dual-write
+  shipped, in review"); body covers what changed, the PR, and test status.
+  Author = your agent name.
+- `add_task_comment` — the same outcome on the task itself, so it reads in
+  place when someone opens the card.
 - `update_task` → `done`.
 - Leave the worktree in place for review; it merges like any PR branch.
 
 ## Failure handling
 
-- Implementer fails or tests stay red: do not mark done. Post an `add_update`
-  describing the failure, remove the worktree, delete the pushed branch if any,
-  set the task back to `todo` (this releases your claim), and move on. If the
-  same task fails twice, `raise_warning` with the error instead of retrying again.
+- Implementer fails or tests stay red: do not mark done. Remove the worktree,
+  delete the pushed branch if any, `add_task_comment` saying exactly what failed
+  and what you would need, and `update_task` → `blocked`. That keeps your name on
+  the task, drops it out of the queue so nobody re-picks a known-broken job, and
+  lands it in the board's **Blocked** column where the user will see it. Move on.
+  Use `todo` instead only when the failure is transient and the task is genuinely
+  fine to hand to the next agent — that releases your claim and re-queues it. If
+  the same task fails twice, `raise_warning` with the error instead of retrying.
 - Claim collision (`already claimed`): another dispatcher took it — skip silently.
 - Subagent hangs beyond ~15 minutes: abandon it, treat as failure above.
 
