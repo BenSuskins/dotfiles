@@ -10,6 +10,9 @@ shared-packages
   ansible
   ansible-lint
 
+  # Docker
+  docker
+
   # Terraform
   terraform
   terraform-ls
