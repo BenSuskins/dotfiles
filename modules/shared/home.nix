@@ -74,6 +74,7 @@ in
       }:
       {
         targets.darwin.copyApps.enable = true;
+        targets.darwin.linkApps.enable = false;
 
         home = {
           file = import ./files.nix {
