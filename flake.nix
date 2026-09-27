@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     # Pinned to the last rev with a cached darwin starship build; the current
     # unstable starship (1.26.0) has no darwin binary and fails to link on
     # macOS 26 (cctools ld64 crash). Drop this once 1.26.0 lands in the cache.
@@ -11,7 +12,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    mac-app-util.url = "github:hraban/mac-app-util";
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,8 +59,8 @@
       homebrew-cask,
       homebrew-can1357,
       home-manager,
-      mac-app-util,
       nixpkgs,
+      nixpkgs-unstable,
       nixpkgs-starship,
       herdr,
       mattpocock-skills,
@@ -99,21 +99,7 @@
           };
           modules = [
             home-manager.darwinModules.home-manager
-            (
-              {
-                pkgs,
-                config,
-                inputs,
-                ...
-              }:
-              {
-                home-manager.sharedModules = [
-                  mac-app-util.homeManagerModules.default
-                ];
-              }
-            )
             nix-homebrew.darwinModules.nix-homebrew
-            mac-app-util.darwinModules.default
             {
               nixpkgs.overlays = [
                 herdr.overlays.default

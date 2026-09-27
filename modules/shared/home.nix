@@ -73,6 +73,8 @@ in
         ...
       }:
       {
+        targets.darwin.copyApps.enable = true;
+
         home = {
           file = import ./files.nix {
             inherit
