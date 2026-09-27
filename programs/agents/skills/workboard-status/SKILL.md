@@ -13,6 +13,11 @@ Workboard via the `workboard` MCP server (tools: `find_project`, `get_project`,
 If no `workboard` MCP tools are available, tell the user to connect it:
 `claude mcp add --transport http workboard http://localhost:8787/mcp`
 
+This flow can be delegated to the `workboard-scribe` agent profile to keep the
+bookkeeping out of a long session's context. If you dispatch it, hand it what
+the session actually did and your own `agent_name` — it cannot see your
+conversation, and the post should be attributed to the agent that did the work.
+
 ## Step 0 — Read your replies first
 
 Call `list_answers` with your `agent_name`. It returns comments the user left on

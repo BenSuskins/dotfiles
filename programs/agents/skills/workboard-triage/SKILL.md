@@ -13,6 +13,10 @@ Requires the `workboard` MCP server (tools: `get_activity`, `get_project`,
 user to connect it:
 `claude mcp add --transport http workboard http://localhost:8787/mcp`
 
+Runs well inside the `workboard-reporter` agent profile — MCP only, no
+filesystem access — when a scheduled run shouldn't disturb the caller's context.
+Not required.
+
 ## Step 1 — Scan
 
 Call `get_activity` (default window is fine). For each project check, in order

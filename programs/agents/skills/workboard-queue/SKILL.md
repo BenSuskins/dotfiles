@@ -16,6 +16,14 @@ Requires the `workboard` MCP server (`find_project`, `get_project`,
 `raise_warning`) plus the Task tool for subagents. If unavailable, tell the
 user to connect it: `claude mcp add --transport http workboard http://localhost:8787/mcp`
 
+Each pipeline stage runs as an installed agent profile — `workboard-planner`,
+`workboard-implementer`, `workboard-reviewer`, `workboard-verifier`
+(`npm run claude:install` in the Workboard repo installs them). The profile
+carries that role's constraints and output shape; your prompt supplies the
+specifics. If a profile is missing, fall back to a general-purpose subagent with
+those constraints stated inline, and say once, in one line, that you are running
+without it.
+
 ## Parameters
 
 - `project` (required): project name/slug on the Workboard.
@@ -51,14 +59,16 @@ Never let the loop die on a single pipeline's failure — catch, record, continu
 description is the spec as filed; the thread is everything said since, including
 answers to a question a previous run left on the task.
 
-**1. Plan (subagent, main checkout, read-only).** Dispatch a research/explore
-subagent with: the task title, **description**, and thread (the description is
+**1. Plan (`workboard-planner`, main checkout, read-only).** Dispatch the
+planner (Task tool, `subagent_type: workboard-planner`; without the profile, a
+general-purpose subagent told explicitly that it must not edit any file) with:
+the task title, **description**, and thread (the description is
 the spec — if it is empty or too thin to act on, leave the question with
 `add_task_comment` and move the task to `blocked` with `update_task`, then skip
 it; the user's answer comes back through `list_answers` under `taskReplies` on a
-later run), plus the project goal/summary, and instruction
-to produce an implementation plan — approach, files to touch, test strategy,
-risks. It must not edit files. Return the plan as text.
+later run), plus the project goal/summary. The profile
+already carries the read-only constraint and the plan's shape — approach, files
+to touch, test strategy, risks. Return the plan as text.
 
 **2. Worktree.** Isolate the work so parallel pipelines can't collide:
 
@@ -70,12 +80,37 @@ git worktree add "../$(basename $PWD)-worktrees/task-<id>-<short-slug>" \
 If the branch name exists, the task was partially run before — pick a fresh
 suffix and note it. Record the worktree path; the implementer works ONLY there.
 
-**3. Implement (subagent, inside the worktree).** Dispatch a general-purpose
-subagent told to: `cd` into the worktree path, implement the plan, follow the
-repo's conventions, keep changes scoped to the task, run lint/typecheck/tests
-and make them pass, then commit (conventional message referencing the task)
-and push the branch. It must not touch the main checkout, must not push to
-main, and returns a 3–6 sentence summary of what changed plus test results.
+**3. Implement (`workboard-implementer`, inside the worktree).** Dispatch the
+implementer (`subagent_type: workboard-implementer`) with the worktree path, the
+plan from step 1, and the task title and id. The profile already binds it to the
+worktree, to the repo's own checks, and to a commit-and-push finish.
+
+Without the profile, dispatch a general-purpose subagent and state the
+constraints inline: `cd` into the worktree path, implement the plan, follow the
+repo's conventions, keep changes scoped to the task, run **the checks the repo
+actually defines** — typecheck and tests, plus lint only if a lint script exists
+— and make them pass, then commit (conventional message referencing the task)
+and push the branch. It must not touch the main checkout and must not push to
+the default branch.
+
+Either way it returns a 3–6 sentence summary of what changed plus test results.
+
+**3.5 Review and verify (subagents, on the worktree).** Nothing else stands
+between the implementer and a PR, so run both, in parallel:
+
+- `workboard-reviewer` — give it the worktree path, the task title and
+  description, and the implementer's summary. It reads the diff against the
+  spec and returns `approve` or `changes requested` with an ordered list.
+- `workboard-verifier` — give it the worktree path. It runs the repo's own
+  checks itself and returns a pass/fail table. Its result, not the
+  implementer's claim, is what "tests pass" means from here on.
+
+Blocking findings or a failed check → one more implementer pass carrying both
+reports, then **re-run the verifier** (and the reviewer too, if its findings
+were the blocker). That second result is what decides pass or pipeline failure,
+and it is the table that goes in the PR body — never the failing first one. If
+it still doesn't clear, take the failure path below. Non-blocking review notes
+ride into the PR body either way.
 
 **4. Draft PR (you, from the worktree path).**
 
@@ -83,8 +118,10 @@ main, and returns a 3–6 sentence summary of what changed plus test results.
 git -C <worktree-path> gh pr create --draft ...
 ```
 
-Title: the task title. Body: task id, what changed (from the implementer),
-test status, `Part of <project> queue`. Base: the repo's default branch.
+Title: the task title. Body: task id, what changed (from the implementer), the
+verifier's check table from its **last** run, any non-blocking reviewer notes
+under **Reviewer notes**, and `Part of <project> queue`. Base: the repo's
+default branch.
 
 **5. Bookkeeping (workboard).**
 - `add_link` with the PR URL (kind inferred).
@@ -98,7 +135,8 @@ test status, `Part of <project> queue`. Base: the repo's default branch.
 
 ## Failure handling
 
-- Implementer fails or tests stay red: do not mark done. Remove the worktree,
+- Implementer fails, review findings stay unaddressed, or checks stay red after
+  the second pass: do not mark done. Remove the worktree,
   delete the pushed branch if any, `add_task_comment` saying exactly what failed
   and what you would need, and `update_task` → `blocked`. That keeps your name on
   the task, drops it out of the queue so nobody re-picks a known-broken job, and

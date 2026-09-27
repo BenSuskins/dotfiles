@@ -13,6 +13,10 @@ Requires the `workboard` MCP server (tools: `get_activity`, `list_projects`,
 `save_report`, `list_reports`). If unavailable, tell the user to connect it:
 `claude mcp add --transport http workboard http://localhost:8787/mcp`
 
+Runs well inside the `workboard-reporter` agent profile — MCP only, no
+filesystem access — when a scheduled run shouldn't disturb the caller's context.
+Not required.
+
 ## Step 1 — Gather
 
 1. Ask the window if unclear (default: the last 30 days). Note it in the report.
