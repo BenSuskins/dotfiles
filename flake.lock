@@ -193,6 +193,26 @@
         "type": "github"
       }
     },
+    "nix-plist-manager": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1790283696,
+        "narHash": "sha256-c8J9LK40Mn+6UaS7sJZKSW28L2XkSivSF9dYl6bOeEc=",
+        "owner": "SushyDev",
+        "repo": "nix-plist-manager",
+        "rev": "f3ac4aaa9504e2f27da6314a47acea69a2e778e4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "SushyDev",
+        "repo": "nix-plist-manager",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
       "locked": {
         "lastModified": 1790463110,
@@ -253,6 +273,7 @@
         "homebrew-core": "homebrew-core",
         "mattpocock-skills": "mattpocock-skills",
         "nix-homebrew": "nix-homebrew",
+        "nix-plist-manager": "nix-plist-manager",
         "nixpkgs": "nixpkgs",
         "nixpkgs-starship": "nixpkgs-starship",
         "nixpkgs-unstable": "nixpkgs-unstable"

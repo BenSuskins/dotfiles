@@ -12,6 +12,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nix-plist-manager = {
+      url = "github:SushyDev/nix-plist-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     darwin = {
       url = "github:nix-darwin/nix-darwin/master";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -59,6 +63,7 @@
       homebrew-cask,
       homebrew-can1357,
       home-manager,
+      nix-plist-manager,
       nixpkgs,
       nixpkgs-unstable,
       nixpkgs-starship,
@@ -99,7 +104,12 @@
           };
           modules = [
             home-manager.darwinModules.home-manager
+            nix-plist-manager.darwinModules.default
             nix-homebrew.darwinModules.nix-homebrew
+            {
+              programs.nix-plist-manager.enable = true;
+              home-manager.sharedModules = [ nix-plist-manager.homeManagerModules.default ];
+            }
             {
               nixpkgs.overlays = [
                 herdr.overlays.default

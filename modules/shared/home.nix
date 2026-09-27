@@ -92,15 +92,56 @@ in
           packages = pkgs.callPackage ../${hostRole}/packages.nix { };
           stateVersion = "23.11";
         };
-        programs = import ./programs.nix {
-          inherit
-            pkgs
-            userInfo
-            hostRole
-            agents
-            claude-plugins-official
-            ;
-        };
+        programs =
+          (import ./programs.nix {
+            inherit
+              pkgs
+              userInfo
+              hostRole
+              agents
+              claude-plugins-official
+              ;
+          })
+          // {
+            nix-plist-manager = {
+              enable = true;
+              options.applications = {
+                finder = {
+                  settings.advanced = {
+                    showAllFilenameExtensions = true;
+                    showWarningBeforeChangingAnExtension = false;
+                  };
+                  menuBar.view.showPathBar = true;
+                };
+                systemSettings = {
+                  accessibility.zoom.useScrollGestureWithModifierKeysToZoom = true;
+                  desktopAndDock.dock = {
+                    size = 58;
+                    magnification = {
+                      enabled = true;
+                      size = 66;
+                    };
+                    dockPositionOnScreen = "Bottom";
+                    automaticallyHideAndShowTheDock.enabled = true;
+                    showSuggestedAndRecentAppsInDock = false;
+                  };
+                  general.dateAndTime."24HourTime" = true;
+                  keyboard = {
+                    keyRepeatRate = 2;
+                    delayUntilRepeat = 15;
+                    useF1F2EtcKeysAsStandardFunctionKeys = false;
+                  };
+                  menuBar = {
+                    bluetooth = true;
+                    clock.style = "Digital";
+                    clock.displayTheTimeWithSeconds = true;
+                    sound = "Always Show";
+                  };
+                  trackpad.pointAndClick.tapToClick = true;
+                };
+              };
+            };
+          };
       };
   };
 
