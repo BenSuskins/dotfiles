@@ -51,6 +51,10 @@
       url = "github:anthropics/claude-plugins-official";
       flake = false;
     };
+    rea = {
+      url = "github:morluto/rea/rea-agents-6.7.0";
+      flake = false;
+    };
   };
 
   outputs =
@@ -70,6 +74,7 @@
       herdr,
       mattpocock-skills,
       claude-plugins-official,
+      rea,
     }:
     let
       userInfo = {
@@ -97,7 +102,7 @@
             inherit self claude-plugins-official;
             agents = import ./programs/agents {
               inherit (nixpkgs) lib;
-              inherit mattpocock-skills;
+              inherit mattpocock-skills rea;
             };
             userInfo = userInfo.${host};
             hostRole = host;

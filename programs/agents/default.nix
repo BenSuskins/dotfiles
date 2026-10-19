@@ -1,6 +1,7 @@
 {
   lib,
   mattpocock-skills,
+  rea,
 }:
 
 let
@@ -18,6 +19,8 @@ let
       value = "${mattpocock-skills}/${lib.removePrefix "./" relativePath}";
     }) mattpocockManifest.skills
   );
+
+  reaVersion = (builtins.fromJSON (builtins.readFile "${rea}/package.json")).version;
 
   workboardSkills = {
     workboard-accomplishments = ./skills/workboard-accomplishments;
@@ -44,10 +47,22 @@ in
   };
 
   # Harnesses without plugin support get the skills flat.
-  skills = mattpocockSkills // workboardSkills;
+  skills =
+    mattpocockSkills
+    // workboardSkills
+    // {
+      apple-design = ./skills/apple-design;
+    };
 
   # Claude loads Matt's skills as a plugin instead, to keep them namespaced
   # away from the built-in code-review, research, and prototype skills.
   inherit workboardSkills;
   mattpocockPlugin = mattpocock-skills;
+
+  reaSkills.reverse-engineer-anything = "${rea}/.agents/skills/reverse-engineer-anything";
+  reaMcpArguments = [
+    "-y"
+    "rea-agents@${reaVersion}"
+    "mcp"
+  ];
 }

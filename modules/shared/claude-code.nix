@@ -22,7 +22,7 @@ in
 
   context = agents.context.claude;
 
-  skills = agents.workboardSkills;
+  skills = agents.workboardSkills // agents.reaSkills;
 
   # Pinned in the flake rather than fetched from the marketplace. Loading a
   # plugin here and in enabledPlugins would install it twice.
@@ -36,11 +36,13 @@ in
       mattpocock-skills = agents.mattpocockPlugin;
     };
 
-  # One gateway (MCPJungle) in front of every server. Addressed by LAN IP, not
-  # through mcp.suskins.co.uk: Authelia guards that host including the
-  # /.well-known OAuth documents, so no client can discover how to authenticate.
-  # The cost is that MCP works on the home network only.
+  # Authelia blocks OAuth discovery on mcp.suskins.co.uk. The remote gateway
+  # uses its LAN IP, so the gateway requires the home network.
   mcpServers = {
+    rea = {
+      command = "${pkgs.nodejs_22}/bin/npx";
+      args = agents.reaMcpArguments;
+    };
     suskins = {
       type = "http";
       url = "http://192.168.0.206:8090/mcp";
