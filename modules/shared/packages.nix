@@ -10,6 +10,7 @@ with pkgs;
   dockutil
   eza
   bat
+  caffeine
 
   # Neovim
   tree-sitter
