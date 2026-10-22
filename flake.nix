@@ -47,6 +47,14 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    apple-design = {
+      url = "github:emilkowalski/skills";
+      flake = false;
+    };
+    ui-ux-pro-max = {
+      url = "github:nextlevelbuilder/ui-ux-pro-max-skill";
+      flake = false;
+    };
     claude-plugins-official = {
       url = "github:anthropics/claude-plugins-official";
       flake = false;
@@ -73,6 +81,8 @@
       nixpkgs-starship,
       herdr,
       mattpocock-skills,
+      apple-design,
+      ui-ux-pro-max,
       claude-plugins-official,
       rea,
     }:
@@ -103,6 +113,7 @@
             agents = import ./programs/agents {
               inherit (nixpkgs) lib;
               inherit mattpocock-skills rea;
+              inherit apple-design ui-ux-pro-max;
             };
             userInfo = userInfo.${host};
             hostRole = host;
