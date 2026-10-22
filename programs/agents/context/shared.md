@@ -15,6 +15,13 @@ introduce a second convention.
 - Use TDD in repos with a test harness. In config, infra, and scripting repos,
   verify by running the thing instead.
 
+# Evidence and validation
+
+- Check the current checkout before making claims about its features or state. Treat memory, project summaries, and remote branches as leads, not proof of local code.
+- When auditing feature coverage, trace routes and actions through to user-facing screens. Search results alone do not prove that a feature is absent.
+- State what each check proves. Separate source inspection, local validation, CI, deployment, and behavior on a real device.
+- If current evidence contradicts an earlier answer, correct the answer and explain which source was stale or incomplete.
+
 # Writing
 
 Use Simplified Technical English. Keep writing clear, simple, brief, and humane.
