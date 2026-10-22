@@ -54,6 +54,20 @@ you write — chat replies, docs, commit messages, PR bodies, code comments.
 - `plans/` is scratch space — add it to `.gitignore` if it isn't already.
   Plans don't belong in repo history or PRs.
 
+# Worktrees
+
+- Make all task changes in a dedicated Git worktree. Do not edit the primary checkout.
+- Check for an existing task worktree before you create one. Reuse it when it fits the task.
+- If the repo is not a Git repo or a worktree is not available, explain the limit and ask before editing.
+
+# Documentation and repo setup
+
+- Before you update repo documentation or bootstrap a repo, locate and read the user's `repo-templates` checkout.
+- Read its `CLAUDE.md` and the applicable files under `templates/`. Treat those files as the canonical documentation structure.
+- For new repos, copy the applicable templates into `docs/`, then replace every placeholder with verified repo details.
+- For existing docs, follow the canonical structure when you revise them. Keep accurate project-specific content and remove sections that do not apply.
+- Read the target repo's existing docs and source before writing. Do not guess project facts.
+
 # Workboard
 
 This machine runs **Workboard**, an AI-native project dashboard, reachable over
