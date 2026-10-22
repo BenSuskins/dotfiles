@@ -1,6 +1,8 @@
 {
   lib,
   mattpocock-skills,
+  apple-design,
+  ui-ux-pro-max,
   rea,
 }:
 
@@ -29,12 +31,16 @@ let
     workboard-status = ./skills/workboard-status;
     workboard-triage = ./skills/workboard-triage;
   };
+
+  designSkills = {
+    apple-design = "${apple-design}/skills/apple-design";
+    ui-ux-pro-max = "${ui-ux-pro-max}/.claude/skills/ui-ux-pro-max";
+  };
 in
 {
   context = {
-    claude = fragments [
+    shared = fragments [
       ./context/shared.md
-      ./context/claude-code.md
     ];
     codex = fragments [
       ./context/shared.md
@@ -47,16 +53,10 @@ in
   };
 
   # Harnesses without plugin support get the skills flat.
-  skills =
-    mattpocockSkills
-    // workboardSkills
-    // {
-      apple-design = ./skills/apple-design;
-    };
+  skills = mattpocockSkills // workboardSkills // designSkills;
 
-  # Claude loads Matt's skills as a plugin instead, to keep them namespaced
-  # away from the built-in code-review, research, and prototype skills.
-  inherit workboardSkills;
+  # Plugin-capable clients can load the upstream skill bundle as a plugin.
+  inherit workboardSkills designSkills;
   mattpocockPlugin = mattpocock-skills;
 
   reaSkills.reverse-engineer-anything = "${rea}/.agents/skills/reverse-engineer-anything";

@@ -17,24 +17,14 @@ introduce a second convention.
 
 # Writing
 
-Write in Simplified Technical English (ASD-STE100), governed by Zinsser's four
-principles: clarity, simplicity, brevity, humanity. This applies to everything
-you write — chat replies, docs, commit messages, PR bodies, code comments.
+Use Simplified Technical English. Keep writing clear, simple, brief, and humane.
 
-- One meaning per word, one word per meaning. Never vary vocabulary for style.
-  Call the same thing the same name every time.
-- Use the active voice. Name the actor.
-- Use the simple present tense. Avoid future and perfect forms where the simple
-  form carries the meaning.
-- One instruction per sentence. Use the imperative for instructions.
-- Keep sentences short: 20 words for instructions, 25 for description.
-- Keep a paragraph to one topic and six sentences.
-- Keep articles in. Write "the file", not "file".
-- Do not stack more than three nouns together.
-- Do not use a gerund as a noun, and do not chain gerunds.
-- Cut every word that does no work. Prefer the short word to the long one.
-- No throat-clearing, no slang, no idiom, no undefined jargon.
-- Write to a person, not to a spec. Brevity is not curtness.
+- Use active voice and name the actor. Prefer simple present tense.
+- Use one instruction per sentence. Use the imperative for instructions.
+- Keep each paragraph on one topic. Keep sentences short.
+- Use stable terms and common words. Keep articles in.
+- Avoid idioms, undefined jargon, and noun stacks.
+- Remove words that add no meaning. Keep enough detail for a person to act.
 
 # Tone and Behavior
 
@@ -45,7 +35,8 @@ you write — chat replies, docs, commit messages, PR bodies, code comments.
 - Be concise. Short summaries are fine; save the extended breakdown for when
   we're working through a plan.
 - Don't flatter or compliment unless I've asked for your judgement.
-- Ask rather than guess. If my intent is ambiguous, say so.
+- When a task has clear options, present them and ask the user to choose.
+- Ask rather than guess when intent is unclear.
 
 # Planning
 
@@ -63,7 +54,7 @@ you write — chat replies, docs, commit messages, PR bodies, code comments.
 # Documentation and repo setup
 
 - Before you update repo documentation or bootstrap a repo, locate and read the user's `repo-templates` checkout.
-- Read its `CLAUDE.md` and the applicable files under `templates/`. Treat those files as the canonical documentation structure.
+- Read its agent guidance and the applicable files under `templates/`. Treat those files as the canonical documentation structure.
 - For new repos, copy the applicable templates into `docs/`, then replace every placeholder with verified repo details.
 - For existing docs, follow the canonical structure when you revise them. Keep accurate project-specific content and remove sections that do not apply.
 - Read the target repo's existing docs and source before writing. Do not guess project facts.

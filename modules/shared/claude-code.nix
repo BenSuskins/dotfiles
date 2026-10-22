@@ -20,9 +20,9 @@ in
 {
   enable = hostRole == "personal";
 
-  context = agents.context.claude;
+  context = agents.context.shared;
 
-  skills = agents.workboardSkills // agents.reaSkills;
+  skills = agents.workboardSkills // agents.designSkills // agents.reaSkills;
 
   # Pinned in the flake rather than fetched from the marketplace. Loading a
   # plugin here and in enabledPlugins would install it twice.
