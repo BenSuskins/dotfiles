@@ -1,64 +1,51 @@
-# CLAUDE.md
+# Repository Guide
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This repository defines macOS developer environments with Nix flakes, nix-darwin, and Home Manager. It builds the `personal` and `work` configurations for `aarch64-darwin`.
 
-## Overview
+## Structure
 
-This is a Nix flake-based macOS configuration using nix-darwin and home-manager. It manages two separate configurations: `personal` and `work`.
+- `flake.nix` defines inputs, shared user data, and both Darwin configurations.
+- `hosts/personal/` and `hosts/work/` are host entry points. Both import the shared Home Manager and system modules.
+- `modules/shared/` holds common system, Home Manager, application, and shell settings.
+- `modules/personal/` and `modules/work/` hold host-specific packages, Homebrew formulae, and casks.
+- `programs/` contains source configuration and the agent setup assembled by Nix.
 
-## Commands
+Read the relevant module and its imports before changing configuration. Follow the existing module structure and attribute style. Keep shared behavior in `modules/shared/`; use a host module when behavior differs by `hostRole`.
 
-```shell
-# Update flake inputs
-nix flake update
+## Nix Configuration
 
-# Build configuration (check for errors without applying)
-sudo darwin-rebuild build --flake .#personal
-sudo darwin-rebuild build --flake .#work
+- `flake.nix` passes `userInfo`, `hostRole`, and the assembled `agents` value through module arguments. Use these values instead of duplicating host-specific data.
+- Shared program configuration is composed in `modules/shared/programs.nix` and host selections are made through `hostRole`.
+- Package lists use the existing `pkgs.callPackage` pattern. Keep package definitions in the matching shared or host module.
+- `programs/agents/default.nix` assembles context and skill sources for Codex, Claude Code, and OpenCode. Put shared agent guidance in `programs/agents/context/shared.md`; put client-specific guidance in that client's context file.
+- Nix manages `~/.codex/AGENTS.md` and `~/.codex/skills` from `programs/agents/`. Codex owns `~/.codex/config.toml`; follow the user's request and the established local workflow when editing runtime settings.
+- Home Manager copies Darwin applications and disables app linking. Preserve both settings when editing Home Manager configuration.
+- Homebrew activation uses `cleanup = "zap"`. Account for its removal of unmanaged applications when changing cask management.
 
-# Apply configuration
-sudo darwin-rebuild switch --flake .#personal
-sudo darwin-rebuild switch --flake .#work
+## Build and Apply
 
-# Rollback to previous generation
-sudo darwin-rebuild rollback
+Format changed Nix files with:
 
-# First-time setup (when darwin-rebuild isn't available yet)
-nix run nix-darwin -- switch --flake .#personal
-nix run nix-darwin -- switch --flake .#work
-
-# Format Nix files
-nixfmt-rfc-style <file.nix>
+```sh
+nixfmt-rfc-style path/to/file.nix
 ```
 
-## Architecture
+Build a configuration to check evaluation without applying it:
 
-### Flake Structure
+```sh
+sudo darwin-rebuild build --flake .#personal
+sudo darwin-rebuild build --flake .#work
+```
 
-- `flake.nix` - Entry point defining two Darwin configurations (`personal`, `work`) with user info and shared modules
-- `hosts/personal/` and `hosts/work/` - Host-specific entry points that import relevant modules
+Apply a configuration only when the user asks to apply it:
 
-### Module Organization
+```sh
+sudo darwin-rebuild switch --flake .#personal
+sudo darwin-rebuild switch --flake .#work
+```
 
-- `modules/shared/` - Common configuration used by both hosts
-  - `programs.nix` - Program configurations (neovim, zsh, git, starship, direnv)
-  - `packages.nix` - Shared nix packages
-  - `casks.nix` - Shared Homebrew casks
-  - `system.nix` - macOS system preferences
-  - `dock/` - Custom dock configuration module
-- `modules/personal/` and `modules/work/` - Host-specific overrides
-  - `home.nix` - Home-manager config, Homebrew casks, dock entries
-  - `packages.nix` - Additional host-specific packages
-  - `casks.nix` - Additional host-specific Homebrew casks
+Use the build for each affected host as the configuration check. A successful build confirms evaluation and build completion; it does not confirm that a configuration was applied or that macOS behavior changed.
 
-### Dotfiles
+## Agent Guidance Changes
 
-- `programs/neovim/` - Neovim configuration (symlinked to `~/.config/nvim`)
-- `programs/ghostty/` - Ghostty terminal configuration
-
-### Key Patterns
-
-- User info (`name`, `username`, `email`) is defined in `flake.nix` and passed as `userInfo` to modules
-- `hostRole` ("personal" or "work") enables conditional configuration
-- Homebrew casks are managed declaratively with `cleanup = "zap"` (removes unmanaged apps)
-- Packages use `pkgs.callPackage ./packages.nix { }` pattern for modularity
+Keep this file focused on repository-specific conventions. Keep shared agent context and client-specific context in `programs/agents/context/`, where Nix assembles them for each client. Do not copy client context into this file.
