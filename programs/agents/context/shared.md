@@ -14,6 +14,10 @@ introduce a second convention.
   integration test proving the fake is faithful.
 - Use TDD in repos with a test harness. In config, infra, and scripting repos,
   verify by running the thing instead.
+- After you complete and locally validate a code change, commit and push the
+  branch, then open a pull request without waiting for the user to ask.
+- Report the pull request link and the current CI status separately. Do not
+  imply that opening a pull request means it has merged or passed CI.
 
 # Evidence and validation
 
