@@ -10,8 +10,8 @@
   settings = {
     "$schema" = "https://opencode.ai/config.json";
 
-    # The same MCPJungle gateway the other clients use, by LAN IP. See the note
-    # in claude-code.nix for why the public hostname is not usable.
+    # Authelia blocks OAuth discovery on the public hostname.
+    # The LAN gateway requires access to the home network.
     mcp.suskins = {
       type = "remote";
       url = "http://192.168.0.206:8090/mcp";

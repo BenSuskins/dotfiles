@@ -22,8 +22,6 @@ let
     }) mattpocockManifest.skills
   );
 
-  reaVersion = (builtins.fromJSON (builtins.readFile "${rea}/package.json")).version;
-
   workboardSkills = {
     workboard-accomplishments = ./skills/workboard-accomplishments;
     workboard-digest = ./skills/workboard-digest;
@@ -39,9 +37,6 @@ let
 in
 {
   context = {
-    shared = fragments [
-      ./context/shared.md
-    ];
     codex = fragments [
       ./context/shared.md
       ./context/codex.md
@@ -52,17 +47,7 @@ in
     ];
   };
 
-  # Harnesses without plugin support get the skills flat.
   skills = mattpocockSkills // workboardSkills // designSkills;
 
-  # Plugin-capable clients can load the upstream skill bundle as a plugin.
-  inherit workboardSkills designSkills;
-  mattpocockPlugin = mattpocock-skills;
-
   reaSkills.reverse-engineer-anything = "${rea}/.agents/skills/reverse-engineer-anything";
-  reaMcpArguments = [
-    "-y"
-    "rea-agents@${reaVersion}"
-    "mcp"
-  ];
 }

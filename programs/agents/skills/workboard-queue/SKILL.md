@@ -14,11 +14,11 @@ Requires the `workboard` MCP server (`find_project`, `get_project`,
 `list_queued_tasks`, `claim_task`, `add_link`, `add_post`, `update_task`,
 `add_task_comment`, `list_task_comments`, `list_answers`, `ask_question`,
 `raise_warning`) plus the Task tool for subagents. If unavailable, tell the
-user to connect it: `claude mcp add --transport http workboard http://localhost:8787/mcp`
+user to connect the Workboard MCP server in their agent client settings.
 
 Each pipeline stage runs as an installed agent profile — `workboard-planner`,
 `workboard-implementer`, `workboard-reviewer`, `workboard-verifier`
-(`npm run claude:install` in the Workboard repo installs them). The profile
+when those profiles are available. The profile
 carries that role's constraints and output shape; your prompt supplies the
 specifics. If a profile is missing, fall back to a general-purpose subagent with
 those constraints stated inline, and say once, in one line, that you are running

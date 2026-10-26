@@ -10,7 +10,7 @@ piece of their work stands, what moved, and what deserves attention today.
 
 Requires the `workboard` MCP server (tools: `get_activity`, `list_projects`,
 `refresh_project`, `save_report`, `list_reports`). If unavailable, tell the user
-to connect it: `claude mcp add --transport http workboard http://localhost:8787/mcp`
+to connect the Workboard MCP server in their agent client settings.
 
 Runs well inside the `workboard-reporter` agent profile — MCP only, no
 filesystem access — when a scheduled run shouldn't disturb the caller's context.

@@ -5,9 +5,6 @@
   ignores = [
     "*.swp"
     ".envrc"
-    ".claude"
-    "**/.claude/settings.local.json"
-    "CLAUDE.md"
     "DESIGN.md"
     "plans/"
   ];

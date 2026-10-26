@@ -10,8 +10,8 @@ status meeting: outcomes, not effort. Cover **both** the user's own work and
 what agents delivered on their behalf.
 
 Requires the `workboard` MCP server (tools: `get_activity`, `list_projects`,
-`save_report`, `list_reports`). If unavailable, tell the user to connect it:
-`claude mcp add --transport http workboard http://localhost:8787/mcp`
+`save_report`, `list_reports`). If unavailable, tell the user to connect
+the Workboard MCP server in their agent client settings.
 
 Runs well inside the `workboard-reporter` agent profile — MCP only, no
 filesystem access — when a scheduled run shouldn't disturb the caller's context.
@@ -35,7 +35,7 @@ Markdown, grouped by outcome:
 - Title: `## Accomplishments — <window>`.
 - **Shipped**: one bullet per completed outcome — merged PRs (with repo#number),
   closed milestones, resolved warnings. Lead each bullet with the outcome, then
-  the one-line why-it-matters. Attribute agent work inline ("via agent:claude").
+  the one-line why-it-matters. Attribute agent work inline ("via agent:codex").
 - **Delivered by agents**: bullets for claimed-and-completed queue tasks and
   agent-authored updates describing finished work.
 - **In flight at window close**: one line per project still carrying open PRs or

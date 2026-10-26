@@ -55,10 +55,6 @@
       url = "github:nextlevelbuilder/ui-ux-pro-max-skill";
       flake = false;
     };
-    claude-plugins-official = {
-      url = "github:anthropics/claude-plugins-official";
-      flake = false;
-    };
     rea = {
       url = "github:morluto/rea/rea-agents-6.7.0";
       flake = false;
@@ -83,7 +79,6 @@
       mattpocock-skills,
       apple-design,
       ui-ux-pro-max,
-      claude-plugins-official,
       rea,
     }:
     let
@@ -109,7 +104,7 @@
         darwin.lib.darwinSystem {
           inherit system;
           specialArgs = {
-            inherit self claude-plugins-official;
+            inherit self;
             agents = import ./programs/agents {
               inherit (nixpkgs) lib;
               inherit mattpocock-skills rea;

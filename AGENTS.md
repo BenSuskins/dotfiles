@@ -17,7 +17,7 @@ Read the relevant module and its imports before changing configuration. Follow t
 - `flake.nix` passes `userInfo`, `hostRole`, and the assembled `agents` value through module arguments. Use these values instead of duplicating host-specific data.
 - Shared program configuration is composed in `modules/shared/programs.nix` and host selections are made through `hostRole`.
 - Package lists use the existing `pkgs.callPackage` pattern. Keep package definitions in the matching shared or host module.
-- `programs/agents/default.nix` assembles context and skill sources for Codex, Claude Code, and OpenCode. Put shared agent guidance in `programs/agents/context/shared.md`; put client-specific guidance in that client's context file.
+- `programs/agents/default.nix` assembles context and skill sources for Codex and OpenCode. Put shared agent guidance in `programs/agents/context/shared.md`; put client-specific guidance in that client's context file.
 - Nix manages `~/.codex/AGENTS.md` and `~/.codex/skills` from `programs/agents/`. Codex owns `~/.codex/config.toml`; follow the user's request and the established local workflow when editing runtime settings.
 - Home Manager copies Darwin applications and disables app linking. Preserve both settings when editing Home Manager configuration.
 - Homebrew activation uses `cleanup = "zap"`. Account for its removal of unmanaged applications when changing cask management.

@@ -10,8 +10,8 @@ Workboard via the `workboard` MCP server (tools: `find_project`, `get_project`,
 `add_post`, `add_link`, `upsert_summary`, `update_project`, `add_task`,
 `add_task_comment`, `list_answers`, `ask_question`, `add_comment`).
 
-If no `workboard` MCP tools are available, tell the user to connect it:
-`claude mcp add --transport http workboard http://localhost:8787/mcp`
+If no `workboard` MCP tools are available, tell the user to connect
+the Workboard MCP server in their agent client settings.
 
 This flow can be delegated to the `workboard-scribe` agent profile to keep the
 bookkeeping out of a long session's context. If you dispatch it, hand it what

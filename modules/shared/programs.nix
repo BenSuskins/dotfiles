@@ -3,7 +3,6 @@
   userInfo,
   hostRole,
   agents,
-  claude-plugins-official,
   ...
 }:
 
@@ -12,14 +11,6 @@
     enable = true;
   };
 
-  claude-code = import ../shared/claude-code.nix {
-    inherit
-      pkgs
-      hostRole
-      agents
-      claude-plugins-official
-      ;
-  };
   codex = import ../shared/codex.nix { inherit hostRole agents; };
   opencode = import ../shared/opencode.nix { inherit hostRole agents; };
   tmux = import ../shared/tmux.nix { inherit pkgs; };

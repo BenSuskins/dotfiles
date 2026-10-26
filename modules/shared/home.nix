@@ -6,7 +6,6 @@
   userInfo,
   hostRole,
   agents,
-  claude-plugins-official,
   ...
 }:
 
@@ -99,7 +98,6 @@ in
               userInfo
               hostRole
               agents
-              claude-plugins-official
               ;
           })
           // {

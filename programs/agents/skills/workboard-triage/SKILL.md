@@ -10,8 +10,7 @@ the user's intervention — not a status report (that's `workboard-digest`).
 
 Requires the `workboard` MCP server (tools: `get_activity`, `get_project`,
 `save_report`, `raise_warning`, `resolve_warning`). If unavailable, tell the
-user to connect it:
-`claude mcp add --transport http workboard http://localhost:8787/mcp`
+user to connect the Workboard MCP server in their agent client settings.
 
 Runs well inside the `workboard-reporter` agent profile — MCP only, no
 filesystem access — when a scheduled run shouldn't disturb the caller's context.
