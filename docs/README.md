@@ -58,6 +58,7 @@ Verify: re-open the terminal. `darwin-rebuild --version` should return a version
 |---------|---------|
 | `sudo darwin-rebuild switch --flake .#personal` | Apply the personal config |
 | `sudo darwin-rebuild switch --flake .#work` | Apply the work config |
+| `switch` shell alias | Apply the current host config, then delete old Nix generations |
 | `sudo darwin-rebuild build --flake .#<host>` | Build only (validate without applying) |
 | `sudo darwin-rebuild rollback` | Revert to the previous generation |
 | `nix flake update` | Update flake inputs |

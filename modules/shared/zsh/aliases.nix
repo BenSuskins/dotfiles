@@ -35,7 +35,7 @@ in
   nixconfig = "code ~/workspace/dotfiles";
   nixclean = "nix-collect-garbage";
   rebuild = "cd ~/workspace/dotfiles && darwin-rebuild build --flake .#${hostRole}";
-  switch = "cd ~/workspace/dotfiles && sudo darwin-rebuild switch --flake .#${hostRole}";
+  switch = "cd ~/workspace/dotfiles && sudo darwin-rebuild switch --flake .#${hostRole} && nix-collect-garbage -d";
   compare = "cd ~/workspace/dotfiles && nix store diff-closures /run/current-system ./result";
 }
 # SSH — derived from ./hosts.nix
