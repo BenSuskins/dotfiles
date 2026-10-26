@@ -1,7 +1,7 @@
 { pkgs, userInfo, ... }:
 
 let
-  retention = "30d";
+  retention = "5d";
 
   # The Determinate installer owns /etc/nix, so `nix.enable` is false — and both
   # `nix.gc.automatic` and `nix.optimise.automatic` assert it. Declare the same
@@ -29,7 +29,6 @@ in
       RunAtLoad = false;
       StartCalendarInterval = [
         {
-          Weekday = 7;
           Hour = 3;
           Minute = 15;
         }
