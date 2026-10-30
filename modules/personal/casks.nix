@@ -6,6 +6,7 @@ in
 shared-casks
 ++ [
   # Entertainment Tools
+  "steam"
   "vlc"
   "plex"
 
