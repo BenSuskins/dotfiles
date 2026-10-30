@@ -261,6 +261,22 @@
         "type": "github"
       }
     },
+    "pstack": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793314284,
+        "narHash": "sha256-QW55Vg593fNhoQ2dUlr/HLV/5OkGORLZfencXEInbWk=",
+        "owner": "cursor",
+        "repo": "plugins",
+        "rev": "4dd1d05818d19792e7cd6e818f1667f95f7e1dbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "cursor",
+        "repo": "plugins",
+        "type": "github"
+      }
+    },
     "rea": {
       "flake": false,
       "locked": {
@@ -294,6 +310,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-starship": "nixpkgs-starship",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "pstack": "pstack",
         "rea": "rea",
         "ui-ux-pro-max": "ui-ux-pro-max"
       }

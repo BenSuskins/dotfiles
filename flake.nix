@@ -47,6 +47,10 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    pstack = {
+      url = "github:cursor/plugins";
+      flake = false;
+    };
     apple-design = {
       url = "github:emilkowalski/skills";
       flake = false;
@@ -77,6 +81,7 @@
       nixpkgs-starship,
       herdr,
       mattpocock-skills,
+      pstack,
       apple-design,
       ui-ux-pro-max,
       rea,
@@ -107,7 +112,7 @@
             inherit self;
             agents = import ./programs/agents {
               inherit (nixpkgs) lib;
-              inherit mattpocock-skills rea;
+              inherit mattpocock-skills pstack rea;
               inherit apple-design ui-ux-pro-max;
             };
             userInfo = userInfo.${host};
