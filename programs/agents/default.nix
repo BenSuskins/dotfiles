@@ -1,6 +1,7 @@
 {
   lib,
   mattpocock-skills,
+  pstack,
   apple-design,
   ui-ux-pro-max,
   rea,
@@ -34,6 +35,10 @@ let
     apple-design = "${apple-design}/skills/apple-design";
     ui-ux-pro-max = "${ui-ux-pro-max}/.claude/skills/ui-ux-pro-max";
   };
+
+  pstackSkills = {
+    statechart = "${pstack}/pstack/skills/statechart";
+  };
 in
 {
   context = {
@@ -47,7 +52,7 @@ in
     ];
   };
 
-  skills = mattpocockSkills // workboardSkills // designSkills;
+  skills = mattpocockSkills // workboardSkills // designSkills // pstackSkills;
 
   reaSkills.reverse-engineer-anything = "${rea}/.agents/skills/reverse-engineer-anything";
 }
