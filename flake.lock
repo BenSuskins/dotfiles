@@ -54,6 +54,22 @@
         "type": "github"
       }
     },
+    "golang-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793535964,
+        "narHash": "sha256-lulLKBdKhDhURSBcNMn848omGXNyuMKTNHIvxOT8PqI=",
+        "owner": "samber",
+        "repo": "cc-skills-golang",
+        "rev": "bb1d43d98a3f8ab639a0042f90d0ec524e39a477",
+        "type": "github"
+      },
+      "original": {
+        "owner": "samber",
+        "repo": "cc-skills-golang",
+        "type": "github"
+      }
+    },
     "herdr": {
       "inputs": {
         "nixpkgs": [
@@ -298,6 +314,7 @@
       "inputs": {
         "apple-design": "apple-design",
         "darwin": "darwin",
+        "golang-skills": "golang-skills",
         "herdr": "herdr",
         "home-manager": "home-manager",
         "homebrew-bundle": "homebrew-bundle",

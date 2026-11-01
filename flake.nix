@@ -47,6 +47,10 @@
       url = "github:mattpocock/skills";
       flake = false;
     };
+    golang-skills = {
+      url = "github:samber/cc-skills-golang";
+      flake = false;
+    };
     pstack = {
       url = "github:cursor/plugins";
       flake = false;
@@ -81,6 +85,7 @@
       nixpkgs-starship,
       herdr,
       mattpocock-skills,
+      golang-skills,
       pstack,
       apple-design,
       ui-ux-pro-max,
@@ -112,7 +117,12 @@
             inherit self;
             agents = import ./programs/agents {
               inherit (nixpkgs) lib;
-              inherit mattpocock-skills pstack rea;
+              inherit
+                mattpocock-skills
+                golang-skills
+                pstack
+                rea
+                ;
               inherit apple-design ui-ux-pro-max;
             };
             userInfo = userInfo.${host};

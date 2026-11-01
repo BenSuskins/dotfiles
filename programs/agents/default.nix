@@ -1,6 +1,7 @@
 {
   lib,
   mattpocock-skills,
+  golang-skills,
   pstack,
   apple-design,
   ui-ux-pro-max,
@@ -21,6 +22,12 @@ let
       name = baseNameOf relativePath;
       value = "${mattpocock-skills}/${lib.removePrefix "./" relativePath}";
     }) mattpocockManifest.skills
+  );
+
+  golangSkills = lib.mapAttrs (name: _: "${golang-skills}/skills/${name}") (
+    lib.filterAttrs (
+      name: type: type == "directory" && builtins.pathExists "${golang-skills}/skills/${name}/SKILL.md"
+    ) (builtins.readDir "${golang-skills}/skills")
   );
 
   workboardSkills = {
@@ -52,7 +59,7 @@ in
     ];
   };
 
-  skills = mattpocockSkills // workboardSkills // designSkills // pstackSkills;
+  skills = mattpocockSkills // golangSkills // workboardSkills // designSkills // pstackSkills;
 
   reaSkills.reverse-engineer-anything = "${rea}/.agents/skills/reverse-engineer-anything";
 }
