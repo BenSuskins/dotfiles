@@ -33,6 +33,22 @@
         "type": "github"
       }
     },
+    "caldoai-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793905642,
+        "narHash": "sha256-FY4dg5Pm/rpg3oWarfCDTneA1qZ6v6GIQhalEsvgjVY=",
+        "owner": "caldoai",
+        "repo": "skills",
+        "rev": "f3cf47774975a7d9fca45730babf4ff7ad765ada",
+        "type": "github"
+      },
+      "original": {
+        "owner": "caldoai",
+        "repo": "skills",
+        "type": "github"
+      }
+    },
     "darwin": {
       "inputs": {
         "nixpkgs": [
@@ -51,6 +67,22 @@
         "owner": "nix-darwin",
         "ref": "master",
         "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
+    "ecc-skills": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794000110,
+        "narHash": "sha256-2VyyXUOtCpz12fq36MgnxzauXSl/u92t7yX8nDwyOn0=",
+        "owner": "affaan-m",
+        "repo": "ECC",
+        "rev": "d2ef2680594f9a17526a6e1a2e18b3d242c5d17b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "affaan-m",
+        "repo": "ECC",
         "type": "github"
       }
     },
@@ -313,7 +345,9 @@
     "root": {
       "inputs": {
         "apple-design": "apple-design",
+        "caldoai-skills": "caldoai-skills",
         "darwin": "darwin",
+        "ecc-skills": "ecc-skills",
         "golang-skills": "golang-skills",
         "herdr": "herdr",
         "home-manager": "home-manager",
