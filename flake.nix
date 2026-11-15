@@ -51,6 +51,14 @@
       url = "github:samber/cc-skills-golang";
       flake = false;
     };
+    caldoai-skills = {
+      url = "github:caldoai/skills";
+      flake = false;
+    };
+    ecc-skills = {
+      url = "github:affaan-m/ECC";
+      flake = false;
+    };
     pstack = {
       url = "github:cursor/plugins";
       flake = false;
@@ -86,6 +94,8 @@
       herdr,
       mattpocock-skills,
       golang-skills,
+      caldoai-skills,
+      ecc-skills,
       pstack,
       apple-design,
       ui-ux-pro-max,
@@ -120,6 +130,8 @@
               inherit
                 mattpocock-skills
                 golang-skills
+                caldoai-skills
+                ecc-skills
                 pstack
                 rea
                 ;

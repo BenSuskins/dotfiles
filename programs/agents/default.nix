@@ -2,6 +2,8 @@
   lib,
   mattpocock-skills,
   golang-skills,
+  caldoai-skills,
+  ecc-skills,
   pstack,
   apple-design,
   ui-ux-pro-max,
@@ -29,6 +31,11 @@ let
       name: type: type == "directory" && builtins.pathExists "${golang-skills}/skills/${name}/SKILL.md"
     ) (builtins.readDir "${golang-skills}/skills")
   );
+
+  architectureSkills = {
+    untangle-codebase = "${caldoai-skills}/skills/untangle-codebase";
+    hexagonal-architecture = "${ecc-skills}/skills/hexagonal-architecture";
+  };
 
   workboardSkills = {
     workboard-accomplishments = ./skills/workboard-accomplishments;
@@ -59,7 +66,13 @@ in
     ];
   };
 
-  skills = mattpocockSkills // golangSkills // workboardSkills // designSkills // pstackSkills;
+  skills =
+    mattpocockSkills
+    // golangSkills
+    // architectureSkills
+    // workboardSkills
+    // designSkills
+    // pstackSkills;
 
   reaSkills.reverse-engineer-anything = "${rea}/.agents/skills/reverse-engineer-anything";
 }
