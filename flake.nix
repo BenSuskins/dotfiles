@@ -72,7 +72,7 @@
       flake = false;
     };
     rea = {
-      url = "github:morluto/rea/rea-agents-6.7.0";
+      url = "github:morluto/rea/rea-agents-6.9.0";
       flake = false;
     };
   };

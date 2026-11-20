@@ -328,16 +328,16 @@
     "rea": {
       "flake": false,
       "locked": {
-        "lastModified": 1792309245,
-        "narHash": "sha256-GKgXQZdzsmr2bEffi+UaffY5TseJ7dSQvWwF1kuz2og=",
+        "lastModified": 1794473910,
+        "narHash": "sha256-n96fXl7OKRIlQ/nKGBDjN8kT4RIr2atgrQAU379lsoQ=",
         "owner": "morluto",
         "repo": "rea",
-        "rev": "27dc42d10249f0410904a75c0997842eb03b931c",
+        "rev": "d74549e495c58eb4a560279fd9f05508401ea0a0",
         "type": "github"
       },
       "original": {
         "owner": "morluto",
-        "ref": "rea-agents-6.7.0",
+        "ref": "rea-agents-6.9.0",
         "repo": "rea",
         "type": "github"
       }
