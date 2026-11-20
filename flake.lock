@@ -3,11 +3,11 @@
     "apple-design": {
       "flake": false,
       "locked": {
-        "lastModified": 1794591986,
-        "narHash": "sha256-quZAP7AFWI0bPyQSI6yf2tYHpHn0ZnDoNlBwBvyJ9Gs=",
+        "lastModified": 1794746570,
+        "narHash": "sha256-zZnblPcn3vvekGH4YIHMOZ2XMA3sBngwhwLBnNFpD/E=",
         "owner": "emilkowalski",
         "repo": "skills",
-        "rev": "0f2e23b32bb1265e84cff8d3e75785fec953fb1b",
+        "rev": "64eb3deb9a5fbfa041faf783e0bc3fd635872e9c",
         "type": "github"
       },
       "original": {
