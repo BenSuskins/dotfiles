@@ -390,11 +390,11 @@
     "ui-ux-pro-max": {
       "flake": false,
       "locked": {
-        "lastModified": 1794672282,
-        "narHash": "sha256-TFW/qGF0s9gRWHngRJMAlpVzgabPJPsftlc4J4xhOH4=",
+        "lastModified": 1794802203,
+        "narHash": "sha256-QazKixrky2y1KGT5ltrjvSAZ1cOjF77LFt91ZnSRNLY=",
         "owner": "nextlevelbuilder",
         "repo": "ui-ux-pro-max-skill",
-        "rev": "d643997c82e94742dd3bee43210b0198e8bbba3d",
+        "rev": "e59ff376a41f7ca47b7541ad5c116495cbade3ee",
         "type": "github"
       },
       "original": {
