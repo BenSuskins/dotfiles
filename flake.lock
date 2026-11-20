@@ -312,11 +312,11 @@
     "pstack": {
       "flake": false,
       "locked": {
-        "lastModified": 1794713777,
-        "narHash": "sha256-fXXJRZnQZlTfOemfJgC0zSMxsfcvxRhGo21T09/6xic=",
+        "lastModified": 1794896313,
+        "narHash": "sha256-VFEMIRgUEY3/HRlKIqkJdidxoXzgHX7jIL/dhYRr0sU=",
         "owner": "cursor",
         "repo": "plugins",
-        "rev": "bf0c7cd80abdbf7fe47b634978a7d1b4071f71a7",
+        "rev": "e1cc03121a0e71129a4fb730d7c5528a0a3e43c8",
         "type": "github"
       },
       "original": {
